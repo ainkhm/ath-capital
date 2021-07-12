@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "ath-capital",
+    "main": "ath-capital",
+    "prod": "ath-capital"
+  }
+}
