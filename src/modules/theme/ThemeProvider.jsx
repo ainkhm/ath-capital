@@ -20,7 +20,8 @@ export default function ThemeProvider({ children }) {
         ...ThemeSettings,
         palette: {
           ...ThemeSettings.palette,
-          type: isDarkMode ? 'dark' : 'light'
+          // type: isDarkMode ? 'dark' : 'light'
+          type: 'light'
         }
       }),
     [isDarkMode]

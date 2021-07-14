@@ -35,7 +35,7 @@ function ProjectTile({ name, projectId, showDelete }) {
   }
 
   return (
-    <Paper className={classes.root} role="listitem">
+    <Paper className={classes.root} role="listitem" variant="outlined">
       <div className={classes.top}>
         <span className={classes.name} onClick={goToProject}>
           {name || 'No Name'}

@@ -40,10 +40,10 @@ function SignupPage() {
       <Paper className={classes.panel}>
         <SignupForm onSubmit={emailSignup} onSubmitFail={onSubmitFail} />
       </Paper>
-      <div className={classes.orLabel}>or</div>
+      {/* <div className={classes.orLabel}>or</div>
       <div className={classes.providers}>
         <GoogleButton onClick={googleLogin} data-test="google-auth-button" />
-      </div>
+      </div> */}
       <div className={classes.login}>
         <span className={classes.loginLabel}>Already have an account?</span>
         <Link className={classes.loginLink} to={LOGIN_PATH}>

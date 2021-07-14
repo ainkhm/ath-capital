@@ -11,16 +11,31 @@ import DarkThemeIcon from '@material-ui/icons/Brightness4'
 import { makeStyles } from '@material-ui/core/styles'
 import { ThemeContext } from 'modules/theme'
 import styles from './Navbar.styles'
+import MenuIcon from '@material-ui/icons/Menu';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(styles)
 
-function NavbarWithoutAuth({ children, brandPath = '/' }) {
+function NavbarWithoutAuth({ children, brandPath = '/', handleDrawerOpen, open }) {
   const classes = useStyles()
   const { toggleDarkMode, isDarkMode } = useContext(ThemeContext)
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="fixed" className={clsx(classes.appBar, {
+      [classes.appBarShift]: open,
+    })}>
       <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          className={clsx(classes.menuButton, {
+            [classes.hide]: open,
+          })}
+        >
+          <MenuIcon />
+        </IconButton>
         <Typography
           color="inherit"
           variant="h6"
@@ -31,13 +46,13 @@ function NavbarWithoutAuth({ children, brandPath = '/' }) {
           Ath-capital
         </Typography>
         <div className={classes.flex} />
-        <Tooltip title="Toggle light/dark theme">
+        {/* <Tooltip title="Toggle light/dark theme">
           <IconButton
             onClick={toggleDarkMode}
             className={classes.themeModeButton}>
             {isDarkMode ? <LightThemeIcon /> : <DarkThemeIcon />}
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         {children}
       </Toolbar>
     </AppBar>

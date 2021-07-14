@@ -4,7 +4,7 @@ export default (theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     height: '200px',
-    width: '300px',
+    width: '100%',
     margin: theme.spacing(0.5),
     padding: theme.spacing(1.3)
   },
