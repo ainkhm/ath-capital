@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button'
 import NewRequestDialog from '../NewRequestDialog'
 import { useNotifications } from 'modules/notification'
 import RequestsList from '../RequestsList'
+import { REQUESTS_COLLECTION } from 'constants/firebasePaths'
 
 const useStyles = makeStyles(styles)
 
@@ -26,16 +27,17 @@ function useRequestsList() {
 
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth } }) => auth)
+  console.log("auth.uid", auth.uid)
 
-  // useFirestoreConnect([
-  //   {
-  //     collection: PROJECTS_COLLECTION,
-  //     where: ['createdBy', '==', auth.uid]
-  //   }
-  // ])
+  useFirestoreConnect([
+    {
+      collection: REQUESTS_COLLECTION,
+      where: ['createdBy', '==', auth.uid || '']
+    }
+  ])
 
   // Get projects from redux state
-  // const projects = useSelector(({ firestore: { ordered } }) => ordered.projects)
+  const requests = useSelector(({ firestore: { ordered } }) => ordered.requests)
 
   // New dialog
   const [newDialogOpen, changeDialogState] = useState(false)
@@ -45,30 +47,33 @@ function useRequestsList() {
     newDialogOpen ? setStepOne(false) : null
   }
 
-  // function addProject(newInstance) {
-  //   if (!auth.uid) {
-  //     return showError('You must be logged in to create a project')
-  //   }
-  //   return firestore
-  //     .add(PROJECTS_COLLECTION, {
-  //       ...newInstance,
-  //       createdBy: auth.uid,
-  //       createdAt: firestore.FieldValue.serverTimestamp()
-  //     })
-  //     .then(() => {
-  //       toggleDialog()
-  //       showSuccess('Project added successfully')
-  //     })
-  //     .catch((err) => {
-  //       console.error('Error:', err) // eslint-disable-line no-console
-  //       showError(err.message || 'Could not add project')
-  //       return Promise.reject(err)
-  //     })
-  // }
+  function addRequests(newInstance) {
+    if (!auth.uid) {
+      return showError('You must be logged in to create a request')
+    }
+    return firestore
+      .add(REQUESTS_COLLECTION, {
+        ...newInstance,
+        createdBy: auth.uid,
+        createdAt: firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
+        toggleDialog()
+        showSuccess('Request added successfully')
+      })
+      .catch((err) => {
+        console.error('Error:', err) // eslint-disable-line no-console
+        showError(err.message || 'Could not add request')
+        return Promise.reject(err)
+      })
+  }
 
-  // projects, addProject,
 
-  return { newDialogOpen, stepOne, toggleDialog, setStepOne }
+
+  return {
+    requests,
+    addRequests, newDialogOpen, stepOne, toggleDialog, setStepOne
+  }
 }
 
 function ProjectsList() {
@@ -78,22 +83,24 @@ function ProjectsList() {
   const auth = useSelector(({ firebase: { auth } }) => auth)
 
   const {
+    requests,
     newDialogOpen,
     stepOne,
+    addRequests,
     toggleDialog,
     setStepOne
   } = useRequestsList()
 
 
   // Show spinner while projects are loading
-  if (false) {
+  if (!isLoaded(requests)) {
     return <LoadingSpinner />
   }
 
   return (
     <div className={classes.root}>
       <NewRequestDialog
-        onSubmit={() => console.log("abcd")}
+        onSubmit={addRequests}
         open={newDialogOpen}
         onRequestClose={toggleDialog}
         stepOne={stepOne}

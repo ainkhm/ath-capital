@@ -27,5 +27,16 @@ service cloud.firestore {
         allow read, write: if isOwner(get(/databases/$(database)/documents/projects/$(projectId)));
       }
     }
+   
+    // Requests
+    match /requests/{requestId} {
+      // Only requests you own can be viewed
+      allow create: if isOwner(request.resource);
+      allow read, update, delete: if isOwner(resource);
+      // Rules apply to all child collections
+      match /{allChildren=**} {
+        allow read, write: if isOwner(get(/databases/$(database)/documents/requests/$(requestId)));
+      }
+    }
   }
 }

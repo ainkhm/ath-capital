@@ -12,7 +12,7 @@ import {
 import { useSelector } from 'react-redux'
 import { useNotifications } from 'modules/notification'
 import LoadingSpinner from 'components/LoadingSpinner'
-import { PROJECTS_COLLECTION } from 'constants/firebasePaths'
+import { REQUESTS_COLLECTION } from 'constants/firebasePaths'
 import ProjectTile from '../ProjectTile'
 import NewProjectDialog from '../NewProjectDialog'
 import styles from './ProjectsList.styles'
@@ -36,13 +36,13 @@ function useProjectsList() {
 
   useFirestoreConnect([
     {
-      collection: PROJECTS_COLLECTION,
+      collection: REQUESTS_COLLECTION,
       where: ['createdBy', '==', auth.uid]
     }
   ])
 
   // Get projects from redux state
-  const projects = useSelector(({ firestore: { ordered } }) => ordered.projects)
+  const projects = useSelector(({ firestore: { ordered } }) => ordered.requests)
 
   // New dialog
   const [newDialogOpen, changeDialogState] = useState(false)
@@ -53,7 +53,7 @@ function useProjectsList() {
       return showError('You must be logged in to create a project')
     }
     return firestore
-      .add(PROJECTS_COLLECTION, {
+      .add(REQUESTS_COLLECTION, {
         ...newInstance,
         createdBy: auth.uid,
         createdAt: firestore.FieldValue.serverTimestamp()
@@ -92,7 +92,7 @@ function ProjectsList() {
   } = useProjectsList()
 
   // Show spinner while projects are loading
-  if (!isLoaded(projects)) {
+  if (!isLoaded(['abcd'])) {
     return <LoadingSpinner />
   }
 
