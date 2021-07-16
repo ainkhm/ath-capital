@@ -28,16 +28,52 @@ function ReferralIncome() {
   const classes = useStyles()
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth } }) => auth)
-
+  const profile = useSelector(({ firebase: { profile } }) => profile)
 
   const [path, setPath] = useState('')
+  const [userData, setUserData] = useState([])
+
 
   useEffect(() => {
     setPath(window.location.origin)
   }, [])
 
+  useEffect(() => {
+    mapUserData()
+  }, [profile])
+
+  const mapUserData = () => {
+    const tempData = []
+    if (profile.level1) {
+
+      for (let item of profile.level1) {
+        tempData.push({
+          email: item.email,
+          level: '1st'
+        })
+      }
+    }
+    if (profile.level2) {
+      for (let item of profile.level2) {
+        tempData.push({
+          email: item.email,
+          level: '2nd'
+        })
+      }
+    }
+    if (profile.level3) {
+      for (let item of profile.level3) {
+        tempData.push({
+          email: item.email,
+          level: '3rd'
+        })
+      }
+    }
+    setUserData(tempData)
+  }
+
   // Show spinner while projects are loading
-  if (false) {
+  if (!isLoaded(profile)) {
     return <LoadingSpinner />
   }
 
@@ -70,7 +106,7 @@ function ReferralIncome() {
               <Typography color="textSecondary">
                 Your Requests
               </Typography>
-              <RequestsList />
+              <RequestsList userData={userData} />
             </CardContent>
           </Card>
         </Grid>

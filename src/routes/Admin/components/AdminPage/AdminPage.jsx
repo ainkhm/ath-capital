@@ -19,7 +19,61 @@ import RequestsList from '../RequestsList'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import IconButton from '@material-ui/core/IconButton'
 import UsersList from '../UsersList'
+import { COMMISSIONS_COLLECTION, REQUESTS_COLLECTION, USERS_COLLECTION } from 'constants/firebasePaths'
+import Commissions from '../Commissions'
 const useStyles = makeStyles(styles)
+
+function useUsersList() {
+  const { showSuccess, showError } = useNotifications()
+  const firestore = useFirestore()
+
+  useFirestoreConnect([
+    {
+      collection: USERS_COLLECTION,
+      where: ['role', '!=', 'admin']
+    },
+    {
+      collection: REQUESTS_COLLECTION
+    },
+    {
+      collection: COMMISSIONS_COLLECTION
+    }
+  ])
+
+  // Get projects from redux state
+  const users = useSelector(({ firestore: { ordered } }) => ordered.users)
+  const requests = useSelector(({ firestore: { ordered } }) => ordered.requests)
+  const commissions = useSelector(({ firestore: { ordered } }) => ordered.commissions)
+
+  function updateUser(user, updateObj) {
+    console.log('<--', user, updateObj)
+    return firestore.collection('users').doc(user)
+      .update(updateObj)
+      .then(() => {
+        showSuccess('User updated')
+      })
+      .catch((err) => {
+        console.error('Error:', err) // eslint-disable-line no-console
+        showError(err.message || 'Could not update user')
+        return Promise.reject(err)
+      })
+  }
+
+  function updateCommissions(updateObj) {
+    return firestore.collection('commissions').doc('percentages')
+      .update(updateObj)
+      .then(() => {
+        showSuccess('Commissions updated')
+      })
+      .catch((err) => {
+        console.error('Error:', err) // eslint-disable-line no-console
+        showError(err.message || 'Could not update commissions')
+        return Promise.reject(err)
+      })
+  }
+
+  return { users, requests, commissions, updateUser, updateCommissions }
+}
 
 
 function AdminPage() {
@@ -27,6 +81,16 @@ function AdminPage() {
   const classes = useStyles()
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth } }) => auth)
+
+  const {
+    users,
+    requests,
+    commissions,
+    updateUser,
+    updateCommissions
+  } = useUsersList()
+
+  console.log('users -->', users, requests, commissions)
 
 
   const [path, setPath] = useState('')
@@ -36,7 +100,7 @@ function AdminPage() {
   }, [])
 
   // Show spinner while projects are loading
-  if (false) {
+  if (!isLoaded(users) || !isLoaded(requests) || !isLoaded(commissions)) {
     return <LoadingSpinner />
   }
 
@@ -48,9 +112,19 @@ function AdminPage() {
           <Card className={classes.card} variant="outlined">
             <CardContent>
               <Typography color="textSecondary">
+                Commissions
+              </Typography>
+              <Commissions commissions={commissions} updateCommissions={updateCommissions} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} >
+          <Card className={classes.card} variant="outlined">
+            <CardContent>
+              <Typography color="textSecondary">
                 Users
               </Typography>
-              <UsersList />
+              <UsersList users={users} updateUser={updateUser} />
             </CardContent>
           </Card>
         </Grid>
@@ -60,7 +134,7 @@ function AdminPage() {
               <Typography color="textSecondary">
                 User Requests
               </Typography>
-              <RequestsList />
+              <RequestsList requests={requests} />
             </CardContent>
           </Card>
         </Grid>

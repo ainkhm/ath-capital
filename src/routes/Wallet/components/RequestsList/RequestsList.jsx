@@ -11,39 +11,6 @@ import styles from './RequestsList.styles'
 
 const useStyles = makeStyles(styles);
 
-const rows = [
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-];
-
 export default function BasicTable(props) {
   const classes = useStyles();
 

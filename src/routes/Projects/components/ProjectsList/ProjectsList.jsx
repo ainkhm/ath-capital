@@ -93,7 +93,7 @@ function ProjectsList() {
   } = useProjectsList()
 
   // Show spinner while projects are loading
-  if (!isLoaded(['abcd'])) {
+  if (!isLoaded(projects)) {
     return <LoadingSpinner />
   }
 

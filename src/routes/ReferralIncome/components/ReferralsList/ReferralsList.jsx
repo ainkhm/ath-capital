@@ -11,35 +11,7 @@ import styles from './ReferralsList.styles'
 
 const useStyles = makeStyles(styles);
 
-const rows = [
-  {
-    user: 'John Doe',
-    level: '1st',
-    amount: '$10',
-  },
-  {
-    user: 'Jake Doe',
-    level: '1st',
-    amount: '$10',
-  },
-  {
-    user: 'Jane Doe',
-    level: '1st',
-    amount: '$10',
-  },
-  {
-    user: 'Jim Doe',
-    level: '1st',
-    amount: '$10',
-  },
-  {
-    user: 'Jill Doe',
-    level: '1st',
-    amount: '$10',
-  },
-];
-
-export default function BasicTable() {
+export default function BasicTable({ userData }) {
   const classes = useStyles();
 
   return (
@@ -53,10 +25,10 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {userData && userData.map((row, index) => (
             <TableRow key={index}>
 
-              <TableCell >{row.user}</TableCell>
+              <TableCell >{row.email}</TableCell>
               <TableCell >{row.level}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
             </TableRow>

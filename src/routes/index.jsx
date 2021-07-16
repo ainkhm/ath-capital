@@ -26,7 +26,6 @@ export default function createRoutes() {
             WalletRoute,
             ReferralIncomeRoute,
             AdminRoute,
-            // Add More Routes Here 
           ].map((settings) => (
             <Route key={`Route-${settings.path}`} {...settings} />
           ))

@@ -44,7 +44,7 @@ const rows = [
   },
 ];
 
-export default function BasicTable() {
+export default function BasicTable({ requests }) {
   const classes = useStyles();
 
   return (
@@ -59,13 +59,13 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {requests.map((row, index) => (
             <TableRow key={index}>
 
-              <TableCell align="right">{row.sender}</TableCell>
-              <TableCell align="right">{row.receiver}</TableCell>
-              <TableCell align="right">{row.dateTime}</TableCell>
-              <TableCell align="right">{row.url}</TableCell>
+              <TableCell>{row.sender}</TableCell>
+              <TableCell>{row.receiver}</TableCell>
+              <TableCell>{row.dateTime}</TableCell>
+              <TableCell>{row.url}</TableCell>
             </TableRow>
           ))}
         </TableBody>
