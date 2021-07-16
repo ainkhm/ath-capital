@@ -18,6 +18,8 @@ import { useNotifications } from 'modules/notification'
 import RequestsList from '../ReferralsList'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import IconButton from '@material-ui/core/IconButton'
+import CopyToClipboard from 'components/CopyToClipboard'
+import { SIGNUP_PATH } from 'constants/paths'
 const useStyles = makeStyles(styles)
 
 
@@ -56,12 +58,7 @@ function ReferralIncome() {
                   </Typography>
                 </div>
                 <div>
-                  <Typography color="textSecondary">
-                    {path}/{auth.uid}
-                    <IconButton aria-label="delete" className={classes.copyButton} onClick={() => navigator.clipboard.writeText(`${path}/${auth.uid}`)}>
-                      <FileCopyOutlinedIcon />
-                    </IconButton>
-                  </Typography>
+                  <CopyToClipboard text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`} />
                 </div>
               </div>
             </CardContent>

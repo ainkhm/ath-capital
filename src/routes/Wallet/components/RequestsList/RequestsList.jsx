@@ -44,32 +44,35 @@ const rows = [
   },
 ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
   const classes = useStyles();
 
-  return (
-    <TableContainer component={'div'}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Sender Address</TableCell>
-            <TableCell>Receiver Address</TableCell>
-            <TableCell>Date/Time</TableCell>
-            <TableCell>Transaction URL</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <TableRow key={index}>
-
-              <TableCell align="right">{row.sender}</TableCell>
-              <TableCell align="right">{row.receiver}</TableCell>
-              <TableCell align="right">{row.dateTime}</TableCell>
-              <TableCell align="right">{row.url}</TableCell>
+  return props.requests.length > 0
+    ? (
+      <TableContainer component={'div'}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Sender Address</TableCell>
+              <TableCell>Receiver Address</TableCell>
+              <TableCell>Date/Time</TableCell>
+              <TableCell>Transaction URL</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+          <TableBody>
+            {props.requests.map((row, index) => (
+              <TableRow key={index}>
+
+                <TableCell >{row.sender}</TableCell>
+                <TableCell >{row.receiver}</TableCell>
+                <TableCell >{row.dateTime}</TableCell>
+                <TableCell >{row.url}</TableCell>
+              </TableRow>
+            ))
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
+    : <p>No requests</p>
 }

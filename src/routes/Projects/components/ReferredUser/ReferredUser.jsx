@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import styles from './ReferredUser.styles'
 import Card from '@material-ui/core/Card';
@@ -9,30 +9,49 @@ import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles)
 
 function ReferredUser() {
     const classes = useStyles()
+    const profile = useSelector(({ firebase: { profile } }) => profile)
 
-    const userData = [
-        {
-            email: 'abc@gmail.com',
-            level: '1st'
-        },
-        {
-            email: 'def@gmail.com',
-            level: '3rd'
-        },
-        {
-            email: 'ghi@gmail.com',
-            level: '2nd'
-        },
-        {
-            email: 'hjk@gmail.com',
-            level: '1st'
-        },
-    ]
+    const [userData, setUserData] = useState([])
+
+    useEffect(() => {
+        mapUserData()
+    }, [profile])
+
+    const mapUserData = () => {
+        const tempData = []
+        if (profile.level1) {
+
+            for (let item of profile.level1) {
+                tempData.push({
+                    email: item.email,
+                    level: '1st'
+                })
+            }
+        }
+        if (profile.level2) {
+            for (let item of profile.level2) {
+                tempData.push({
+                    email: item.email,
+                    level: '2nd'
+                })
+            }
+        }
+        if (profile.level3) {
+            for (let item of profile.level3) {
+                tempData.push({
+                    email: item.email,
+                    level: '3rd'
+                })
+            }
+        }
+        setUserData(tempData)
+    }
 
     return (
         userData && userData.map(user => (

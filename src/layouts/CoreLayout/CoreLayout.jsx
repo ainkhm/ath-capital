@@ -4,6 +4,8 @@ import Navbar from 'components/Navbar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { makeStyles } from '@material-ui/core/styles';
 import DrawerContainer from 'components/Navbar/Drawer';
+import { useSelector } from 'react-redux';
+import { isEmpty, isLoaded } from 'react-redux-firebase';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,11 @@ function CoreLayout({ children }) {
 
   const classes = useStyles();
 
+  // Get auth from redux state
+  const auth = useSelector(({ firebase }) => firebase.auth)
+  const authExists = isLoaded(auth) && !isEmpty(auth)
+
+
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -48,7 +55,11 @@ function CoreLayout({ children }) {
     <div className={classes.root}>
       <CssBaseline />
       <Navbar {...childProps} />
-      <DrawerContainer {...childProps} />
+      {
+        authExists
+          ? <DrawerContainer {...childProps} />
+          : null
+      }
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}

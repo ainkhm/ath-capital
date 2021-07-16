@@ -27,7 +27,7 @@ function useRequestsList() {
 
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth } }) => auth)
-  console.log("auth.uid", auth.uid)
+
 
   useFirestoreConnect([
     {
@@ -80,7 +80,8 @@ function ProjectsList() {
   const firestore = useFirestore()
   const classes = useStyles()
   // Get auth from redux state
-  const auth = useSelector(({ firebase: { auth } }) => auth)
+  const profile = useSelector(({ firebase: { profile } }) => profile)
+
 
   const {
     requests,
@@ -116,7 +117,7 @@ function ProjectsList() {
                     Wallet
                   </Typography>
                   <Typography component='h4' variant='h4'>
-                    $100
+                    ${profile.wallet}
                   </Typography>
                 </div>
                 <div>
@@ -134,7 +135,7 @@ function ProjectsList() {
               <Typography color="textSecondary">
                 Your Requests
               </Typography>
-              <RequestsList />
+              <RequestsList requests={requests} />
             </CardContent>
           </Card>
         </Grid>

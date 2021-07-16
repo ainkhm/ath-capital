@@ -1,11 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { validateEmail } from 'utils/form'
 import styles from './SignupForm.styles'
+import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormLabel from '@material-ui/core/FormLabel'
+import Radio from '@material-ui/core/Radio'
+import { CUSTOMER, MARKETER } from 'constants/roles'
 
 const useStyles = makeStyles(styles)
 
@@ -14,7 +20,8 @@ function SignupForm({ onSubmit }) {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, isValid, errors }
+    formState: { isSubmitting, isValid, errors },
+    control
   } = useForm({
     mode: 'onChange',
     nativeValidation: false
@@ -60,6 +67,33 @@ function SignupForm({ onSubmit }) {
         error={!!errors.password}
         helperText={errors.password && 'Password is required'}
       />
+      <FormControl component="fieldset" fullWidth>
+        <FormLabel component="legend">Role</FormLabel>
+        <Controller
+          rules={{ required: true }}
+          control={control}
+          defaultValue={CUSTOMER}
+          name="role"
+          render={({ name, onBlur, onChange, value }) => (
+            <RadioGroup
+              name={name}
+              defaultValue={CUSTOMER}
+
+            >
+              <FormControlLabel
+                value={CUSTOMER}
+                control={<Radio color='primary' />}
+                label="Customer"
+              />
+              <FormControlLabel
+                value={MARKETER}
+                control={<Radio color='primary' />}
+                label="Marketer"
+              />
+            </RadioGroup>
+          )}
+        />
+      </FormControl>
       <div className={classes.submit}>
         <Button
           color="primary"

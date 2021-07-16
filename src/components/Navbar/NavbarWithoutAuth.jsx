@@ -13,6 +13,8 @@ import { ThemeContext } from 'modules/theme'
 import styles from './Navbar.styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux'
+import { isEmpty, isLoaded } from 'react-redux-firebase'
 
 const useStyles = makeStyles(styles)
 
@@ -20,22 +22,30 @@ function NavbarWithoutAuth({ children, brandPath = '/', handleDrawerOpen, open }
   const classes = useStyles()
   const { toggleDarkMode, isDarkMode } = useContext(ThemeContext)
 
+  // Get auth from redux state
+  const auth = useSelector(({ firebase }) => firebase.auth)
+  const authExists = isLoaded(auth) && !isEmpty(auth)
+
   return (
     <AppBar position="fixed" className={clsx(classes.appBar, {
       [classes.appBarShift]: open,
     })}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          className={clsx(classes.menuButton, {
-            [classes.hide]: open,
-          })}
-        >
-          <MenuIcon />
-        </IconButton>
+        {
+          authExists
+            ? <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            : null
+        }
         <Typography
           color="inherit"
           variant="h6"

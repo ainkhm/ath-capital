@@ -22,8 +22,9 @@ import CardContent from '@material-ui/core/CardContent'
 import ReferredUser from '../ReferredUser'
 import ReferralChart from '../ReferralChart'
 import ReferralsGraph from '../ReferralsGraph'
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import IconButton from '@material-ui/core/IconButton'
+
+import CopyToClipboard from 'components/CopyToClipboard'
+import { SIGNUP_PATH } from 'constants/paths'
 
 const useStyles = makeStyles(styles)
 
@@ -111,12 +112,7 @@ function ProjectsList() {
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 Referral Link
               </Typography>
-              <Typography color="textSecondary">
-                {path}/{auth.uid}
-                <IconButton aria-label="delete" className={classes.copyButton} onClick={() => navigator.clipboard.writeText(`${path}/${auth.uid}`)}>
-                  <FileCopyOutlinedIcon />
-                </IconButton>
-              </Typography>
+              <CopyToClipboard text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`} />
             </CardContent>
           </Card>
         </Grid>

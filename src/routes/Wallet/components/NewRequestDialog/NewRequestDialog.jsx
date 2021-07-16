@@ -12,6 +12,7 @@ import styles from './NewRequestDialog.styles'
 import Typography from '@material-ui/core/Typography'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import IconButton from '@material-ui/core/IconButton'
+import CopyToClipboard from 'components/CopyToClipboard'
 const useStyles = makeStyles(styles)
 
 function NewRequestDialog({ onSubmit, open, onRequestClose, stepOne, setStepOne }) {
@@ -100,24 +101,9 @@ function NewRequestDialog({ onSubmit, open, onRequestClose, stepOne, setStepOne 
             </DialogActions>
           </form>
           : <>
-            <Typography color="textSecondary" style={{ textAlign: 'center' }} >
-              0x0a245F5631213090e1B2d51C2e4eE970aE163fBE
-              <IconButton aria-label="delete" className={classes.copyButton} onClick={() => navigator.clipboard.writeText(`0x0a245F5631213090e1B2d51C2e4eE970aE163fBE`)}>
-                <FileCopyOutlinedIcon />
-              </IconButton>
-            </Typography>
-            <Typography color="textSecondary" style={{ textAlign: 'center' }}>
-              0x0a245F5631213090e1B2d51C2e4eE970aE163fBE
-              <IconButton aria-label="delete" className={classes.copyButton} onClick={() => navigator.clipboard.writeText(`0x0a245F5631213090e1B2d51C2e4eE970aE163fBE`)}>
-                <FileCopyOutlinedIcon />
-              </IconButton>
-            </Typography>
-            <Typography color="textSecondary" style={{ textAlign: 'center' }}>
-              0x0a245F5631213090e1B2d51C2e4eE970aE163fBE
-              <IconButton aria-label="delete" className={classes.copyButton} onClick={() => navigator.clipboard.writeText(`0x0a245F5631213090e1B2d51C2e4eE970aE163fBE`)}>
-                <FileCopyOutlinedIcon />
-              </IconButton>
-            </Typography>
+            <CopyToClipboard text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'} />
+            <CopyToClipboard text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'} />
+            <CopyToClipboard text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'} />
             <DialogActions>
               <Button
                 type="button"
