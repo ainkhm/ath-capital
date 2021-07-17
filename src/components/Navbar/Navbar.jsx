@@ -30,7 +30,7 @@ function Navbar(props) {
         {authExists ? (
           // <AccountMenu />
           <p>
-            {auth.email}
+            {profile.email}
           </p>
         ) : (
           <Button

@@ -12,7 +12,7 @@ import {
 import { useSelector } from 'react-redux'
 import { useNotifications } from 'modules/notification'
 import LoadingSpinner from 'components/LoadingSpinner'
-import { REQUESTS_COLLECTION } from 'constants/firebasePaths'
+import { COMMISSIONS_COLLECTION, REQUESTS_COLLECTION } from 'constants/firebasePaths'
 import ProjectTile from '../ProjectTile'
 import NewProjectDialog from '../NewProjectDialog'
 import styles from './ProjectsList.styles'
@@ -39,6 +39,13 @@ function useProjectsList() {
     {
       collection: REQUESTS_COLLECTION,
       where: ['createdBy', '==', auth.uid]
+    }
+  ])
+
+
+  useFirestoreConnect([
+    {
+      collection: COMMISSIONS_COLLECTION,
     }
   ])
 

@@ -14,14 +14,10 @@ import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import { useNotifications } from 'modules/notification'
 import RequestsList from '../ReferralsList'
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import IconButton from '@material-ui/core/IconButton'
 import CopyToClipboard from 'components/CopyToClipboard'
 import { SIGNUP_PATH, USERS_PATH } from 'constants/paths'
 import { Redirect } from 'react-router-dom'
-import { COMMISSIONS_COLLECTION } from 'constants/firebasePaths'
 const useStyles = makeStyles(styles)
 
 
@@ -35,11 +31,6 @@ function ReferralIncome() {
   const [path, setPath] = useState('')
   const [userData, setUserData] = useState([])
 
-  useFirestoreConnect([
-    {
-      collection: COMMISSIONS_COLLECTION,
-    }
-  ])
 
   // Get projects from redux state
   const commissions = useSelector(({ firestore: { ordered } }) => ordered.commissions)

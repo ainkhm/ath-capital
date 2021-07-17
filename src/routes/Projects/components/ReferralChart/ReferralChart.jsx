@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import styles from './ReferralChart.styles'
 import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
+import { getFormattedDate, getOccurrence } from 'utils/misc';
 
 const useStyles = makeStyles(styles)
 
@@ -44,14 +45,34 @@ function ReferralChart() {
     }, [profile])
 
     const createChartData = () => {
-        const completeArray = [...profile.level1, ...profile.level2, ...profile.level3]
-        const tempLabels = []
         const tempData = []
 
-        for (let [index, item] of completeArray.entries()) {
+        const completeArray = [...profile.level1, ...profile.level2, ...profile.level3]
+            .map(item => item.createdAt.seconds)
+            .sort((a, b) => a - b)
+            .map(seconds => getFormattedDate(seconds * 1000))
 
-            console.log(index, item)
+        const filteredArray = [...new Set(completeArray)]
+
+        console.log(completeArray, filteredArray)
+
+        for (let item of filteredArray) {
+
+            tempData.push(getOccurrence(completeArray, item))
         }
+
+        setData({
+            labels: filteredArray,
+            datasets: [
+                {
+                    label: 'Referrals',
+                    data: tempData,
+                    fill: false,
+                    backgroundColor: '#02AA44',
+                    borderColor: '#02AA4488',
+                },
+            ],
+        })
 
     }
 
