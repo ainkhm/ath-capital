@@ -21,6 +21,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CopyToClipboard from 'components/CopyToClipboard'
 import { SIGNUP_PATH, USERS_PATH } from 'constants/paths'
 import { Redirect } from 'react-router-dom'
+import { COMMISSIONS_COLLECTION } from 'constants/firebasePaths'
 const useStyles = makeStyles(styles)
 
 
@@ -33,6 +34,17 @@ function ReferralIncome() {
 
   const [path, setPath] = useState('')
   const [userData, setUserData] = useState([])
+
+  useFirestoreConnect([
+    {
+      collection: COMMISSIONS_COLLECTION,
+    }
+  ])
+
+  // Get projects from redux state
+  const commissions = useSelector(({ firestore: { ordered } }) => ordered.commissions)
+
+  console.log(commissions)
 
 
   useEffect(() => {
@@ -50,7 +62,8 @@ function ReferralIncome() {
       for (let item of profile.level1) {
         tempData.push({
           email: item.email,
-          level: '1st'
+          level: '1st',
+          amount: commissions && commissions[0].level1
         })
       }
     }
@@ -58,7 +71,8 @@ function ReferralIncome() {
       for (let item of profile.level2) {
         tempData.push({
           email: item.email,
-          level: '2nd'
+          level: '2nd',
+          amount: commissions && commissions[0].level2
         })
       }
     }
@@ -66,7 +80,8 @@ function ReferralIncome() {
       for (let item of profile.level3) {
         tempData.push({
           email: item.email,
-          level: '3rd'
+          level: '3rd',
+          amount: commissions && commissions[0].level3
         })
       }
     }
@@ -74,7 +89,7 @@ function ReferralIncome() {
   }
 
   // Show spinner while projects are loading
-  if (!isLoaded(profile)) {
+  if (!isLoaded(profile) || !isLoaded(commissions)) {
     return <LoadingSpinner />
   }
 
@@ -93,7 +108,7 @@ function ReferralIncome() {
                     Referral Income
                   </Typography>
                   <Typography component='h4' variant='h4'>
-                    $100
+                    -
                   </Typography>
                 </div>
                 <div>

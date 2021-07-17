@@ -115,7 +115,7 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
             color="primary"
             disabled={isSubmitting || !isValid}
             tabIndex="2">
-            {isSubmitting ? 'Creating...' : 'Create'}
+            {isSubmitting ? 'Updating...' : 'Update'}
           </Button>
         </DialogActions>
       </form>

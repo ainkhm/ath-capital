@@ -21,7 +21,7 @@ export default function BasicTable({ userData }) {
           <TableRow>
             <TableCell>Referred User</TableCell>
             <TableCell>Level</TableCell>
-            <TableCell align="right">Income</TableCell>
+            <TableCell align="right">Percent</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
