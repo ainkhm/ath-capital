@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import LoginRoute from './Login'
@@ -10,12 +10,13 @@ import NotFoundRoute from './NotFound'
 import WalletRoute from './Wallet'
 import ReferralIncomeRoute from './ReferralIncome'
 import AdminRoute from './Admin'
+import { LOGIN_PATH } from 'constants/paths'
 
 export default function createRoutes() {
   return (
     <CoreLayout>
       <Switch>
-        <Route exact path={Home.path} component={() => <Home.component />} />
+        <Route exact path={Home.path} component={() => <Redirect to={LOGIN_PATH} />} />
         {
           // Build Route components from routeSettings
           [

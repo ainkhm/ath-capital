@@ -18,6 +18,8 @@ import NewRequestDialog from '../NewRequestDialog'
 import { useNotifications } from 'modules/notification'
 import RequestsList from '../RequestsList'
 import { REQUESTS_COLLECTION } from 'constants/firebasePaths'
+import { USERS_PATH } from 'constants/paths'
+import { Redirect } from 'react-router-dom'
 
 const useStyles = makeStyles(styles)
 
@@ -55,7 +57,8 @@ function useRequestsList() {
       .add(REQUESTS_COLLECTION, {
         ...newInstance,
         createdBy: auth.uid,
-        createdAt: firestore.FieldValue.serverTimestamp()
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        status: 'pending'
       })
       .then(() => {
         toggleDialog()
@@ -98,8 +101,10 @@ function ProjectsList() {
     return <LoadingSpinner />
   }
 
-  return (
-    <div className={classes.root}>
+
+  return profile.role === "admin"
+    ? <Redirect to={USERS_PATH} />
+    : (<div className={classes.root}>
       <NewRequestDialog
         onSubmit={addRequests}
         open={newDialogOpen}
@@ -141,7 +146,7 @@ function ProjectsList() {
         </Grid>
       </Grid>
     </div>
-  )
+    )
 }
 
 export default ProjectsList

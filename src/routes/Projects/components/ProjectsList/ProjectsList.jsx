@@ -87,9 +87,6 @@ function ProjectsList() {
   const classes = useStyles()
   const {
     projects,
-    addProject,
-    newDialogOpen,
-    toggleDialog
   } = useProjectsList()
 
   // Show spinner while projects are loading
@@ -99,11 +96,7 @@ function ProjectsList() {
 
   return (
     <div className={classes.root}>
-      <NewProjectDialog
-        onSubmit={addProject}
-        open={newDialogOpen}
-        onRequestClose={toggleDialog}
-      />
+
 
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={12} md={6} >

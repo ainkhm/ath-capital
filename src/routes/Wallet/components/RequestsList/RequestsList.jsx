@@ -24,6 +24,7 @@ export default function BasicTable(props) {
               <TableCell>Receiver Address</TableCell>
               <TableCell>Date/Time</TableCell>
               <TableCell>Transaction URL</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -34,6 +35,7 @@ export default function BasicTable(props) {
                 <TableCell >{row.receiver}</TableCell>
                 <TableCell >{row.dateTime}</TableCell>
                 <TableCell >{row.url}</TableCell>
+                <TableCell >{row.status}</TableCell>
               </TableRow>
             ))
             }

@@ -19,7 +19,8 @@ import RequestsList from '../ReferralsList'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import IconButton from '@material-ui/core/IconButton'
 import CopyToClipboard from 'components/CopyToClipboard'
-import { SIGNUP_PATH } from 'constants/paths'
+import { SIGNUP_PATH, USERS_PATH } from 'constants/paths'
+import { Redirect } from 'react-router-dom'
 const useStyles = makeStyles(styles)
 
 
@@ -77,8 +78,10 @@ function ReferralIncome() {
     return <LoadingSpinner />
   }
 
-  return (
-    <div className={classes.root}>
+
+  return profile.role === "admin"
+    ? <Redirect to={USERS_PATH} />
+    : (<div className={classes.root}>
 
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={12} >
@@ -112,7 +115,7 @@ function ReferralIncome() {
         </Grid>
       </Grid>
     </div>
-  )
+    )
 }
 
 export default ReferralIncome

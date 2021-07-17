@@ -1,3 +1,4 @@
 import AdminPage from './AdminPage'
+import enhance from './AdminPage.enhancer'
 
-export default AdminPage
+export default enhance(AdminPage)

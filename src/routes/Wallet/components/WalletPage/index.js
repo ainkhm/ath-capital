@@ -1,3 +1,4 @@
 import WalletPage from './WalletPage'
+import enhance from './WalletPage.enhancer'
 
-export default WalletPage
+export default enhance(WalletPage)

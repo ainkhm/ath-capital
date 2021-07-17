@@ -13,14 +13,13 @@ import styles from './AdminPage.styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import { useNotifications } from 'modules/notification'
 import RequestsList from '../RequestsList'
-import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import IconButton from '@material-ui/core/IconButton'
 import UsersList from '../UsersList'
 import { COMMISSIONS_COLLECTION, REQUESTS_COLLECTION, USERS_COLLECTION } from 'constants/firebasePaths'
 import Commissions from '../Commissions'
+import { LIST_PATH } from 'constants/paths'
+import { Redirect } from 'react-router-dom'
 const useStyles = makeStyles(styles)
 
 function useUsersList() {
@@ -44,6 +43,11 @@ function useUsersList() {
   const users = useSelector(({ firestore: { ordered } }) => ordered.users)
   const requests = useSelector(({ firestore: { ordered } }) => ordered.requests)
   const commissions = useSelector(({ firestore: { ordered } }) => ordered.commissions)
+
+  // New dialog
+  const [newDialogOpen, changeDialogState] = useState(false)
+  const toggleDialog = () => changeDialogState(!newDialogOpen)
+
 
   function updateUser(user, updateObj) {
     console.log('<--', user, updateObj)
@@ -72,7 +76,22 @@ function useUsersList() {
       })
   }
 
-  return { users, requests, commissions, updateUser, updateCommissions }
+  function approveRequest(requestID) {
+    return firestore.collection('requests').doc(requestID)
+      .update({
+        status: 'approved'
+      })
+      .then(() => {
+        showSuccess('Request status updated')
+      })
+      .catch((err) => {
+        console.error('Error:', err) // eslint-disable-line no-console
+        showError(err.message || 'Could not update request status')
+        return Promise.reject(err)
+      })
+  }
+
+  return { users, requests, commissions, newDialogOpen, toggleDialog, updateUser, updateCommissions, approveRequest }
 }
 
 
@@ -81,16 +100,18 @@ function AdminPage() {
   const classes = useStyles()
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth } }) => auth)
+  const profile = useSelector(({ firebase: { profile } }) => profile)
 
   const {
     users,
     requests,
     commissions,
+    newDialogOpen,
+    toggleDialog,
     updateUser,
-    updateCommissions
+    updateCommissions,
+    approveRequest
   } = useUsersList()
-
-  console.log('users -->', users, requests, commissions)
 
 
   const [path, setPath] = useState('')
@@ -104,9 +125,10 @@ function AdminPage() {
     return <LoadingSpinner />
   }
 
-  return (
-    <div className={classes.root}>
 
+  return profile.role !== "admin"
+    ? <Redirect to={LIST_PATH} />
+    : (<div className={classes.root}>
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={12} >
           <Card className={classes.card} variant="outlined">
@@ -124,7 +146,11 @@ function AdminPage() {
               <Typography color="textSecondary">
                 Users
               </Typography>
-              <UsersList users={users} updateUser={updateUser} />
+              <UsersList
+                users={users}
+                updateUser={updateUser}
+                newDialogOpen={newDialogOpen}
+                toggleDialog={toggleDialog} />
             </CardContent>
           </Card>
         </Grid>
@@ -134,13 +160,13 @@ function AdminPage() {
               <Typography color="textSecondary">
                 User Requests
               </Typography>
-              <RequestsList requests={requests} />
+              <RequestsList requests={requests} approveRequest={approveRequest} />
             </CardContent>
           </Card>
         </Grid>
       </Grid>
     </div>
-  )
+    )
 }
 
 export default AdminPage

@@ -8,43 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 // import Paper from '@material-ui/core/Paper';
 import styles from './RequestsList.styles'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(styles);
 
-const rows = [
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-  {
-    sender: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    receiver: '0x0a245F5631213090e1B2d51C2e4eE970aE163fBE',
-    dateTime: '10:22/01-01-2021',
-    url: 'https://ropsten.etherscan.io/tx/0xdcbb6396b6bc1230c2d4e3edc806e811a8fe40687221234040f29af393126e17'
-  },
-];
 
-export default function BasicTable({ requests }) {
+export default function BasicTable({ requests, approveRequest }) {
   const classes = useStyles();
 
   return (
@@ -56,16 +25,27 @@ export default function BasicTable({ requests }) {
             <TableCell>Receiver Address</TableCell>
             <TableCell>Date/Time</TableCell>
             <TableCell>Transaction URL</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {requests.map((row, index) => (
             <TableRow key={index}>
-
               <TableCell>{row.sender}</TableCell>
               <TableCell>{row.receiver}</TableCell>
               <TableCell>{row.dateTime}</TableCell>
               <TableCell>{row.url}</TableCell>
+              <TableCell>{row.status}</TableCell>
+              <TableCell>
+                {
+                  row.status === "pending"
+                    ? <Button variant="contained" color="primary" onClick={() => { approveRequest(row.id) }}>
+                      Approve
+                    </Button>
+                    : null
+                }
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
