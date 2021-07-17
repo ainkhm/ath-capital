@@ -54,6 +54,7 @@ function useUsersList() {
     return firestore.collection('users').doc(user)
       .update(updateObj)
       .then(() => {
+        toggleDialog()
         showSuccess('User updated')
       })
       .catch((err) => {

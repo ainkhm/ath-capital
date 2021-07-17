@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,12 +17,15 @@ const useStyles = makeStyles(styles);
 export default function BasicTable({ users, updateUser, newDialogOpen, toggleDialog }) {
   const classes = useStyles();
 
+  const [user, setUser] = useState({})
+
   return (
     <TableContainer component={'div'}>
       <EditUserDialog
         onSubmit={updateUser}
         open={newDialogOpen}
         onRequestClose={toggleDialog}
+        selectedUser={user}
       />
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -42,7 +45,7 @@ export default function BasicTable({ users, updateUser, newDialogOpen, toggleDia
               <TableCell>{row.role}</TableCell>
               <TableCell>{row.wallet}</TableCell>
               <TableCell>
-                <Button variant="contained" color="primary" onClick={toggleDialog}>
+                <Button variant="contained" color="primary" onClick={() => { setUser(row); toggleDialog() }}>
                   Edit
                 </Button>
               </TableCell>
