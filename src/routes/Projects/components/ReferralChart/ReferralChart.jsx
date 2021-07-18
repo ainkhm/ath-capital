@@ -62,7 +62,6 @@ function ReferralChart() {
 
 		const filteredArray = [...new Set(completeArray)];
 
-		console.log(completeArray, filteredArray);
 
 		for (let item of filteredArray) {
 			tempData.push(getOccurrence(completeArray, item));

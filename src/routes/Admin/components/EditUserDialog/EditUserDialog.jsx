@@ -25,7 +25,6 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
 	} = useForm({ mode: 'onChange' });
 
 	useEffect(() => {
-		console.log(selectedUser);
 		setValue('email', selectedUser.email);
 		setValue('username', selectedUser.username);
 		setValue('role', selectedUser.role);

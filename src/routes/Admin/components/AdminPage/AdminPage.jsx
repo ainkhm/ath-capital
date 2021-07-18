@@ -15,11 +15,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { useNotifications } from 'modules/notification';
 import RequestsList from '../RequestsList';
+import WithdrawsList from '../WithdrawsList';
 import UsersList from '../UsersList';
 import {
 	COMMISSIONS_COLLECTION,
 	REQUESTS_COLLECTION,
 	USERS_COLLECTION,
+	WITHDRAWALS_COLLECTION,
 } from 'constants/firebasePaths';
 import Commissions from '../Commissions';
 import { LIST_PATH } from 'constants/paths';
@@ -41,12 +43,18 @@ function useUsersList() {
 		{
 			collection: COMMISSIONS_COLLECTION,
 		},
+		{
+			collection: WITHDRAWALS_COLLECTION,
+		},
 	]);
 
 	// Get projects from redux state
 	const users = useSelector(({ firestore: { ordered } }) => ordered.users);
 	const requests = useSelector(
 		({ firestore: { ordered } }) => ordered.requests
+	);
+	const withdrawalRequests = useSelector(
+		({ firestore: { ordered } }) => ordered.withdrawalRequests
 	);
 	const commissions = useSelector(
 		({ firestore: { ordered } }) => ordered.commissions
@@ -57,9 +65,8 @@ function useUsersList() {
 	const toggleDialog = () => changeDialogState(!newDialogOpen);
 
 	function updateUser(user, updateObj) {
-		console.log('<--', user, updateObj);
 		return firestore
-			.collection('users')
+			.collection(USERS_COLLECTION)
 			.doc(user)
 			.update(updateObj)
 			.then(() => {
@@ -75,7 +82,7 @@ function useUsersList() {
 
 	function updateCommissions(updateObj) {
 		return firestore
-			.collection('commissions')
+			.collection(COMMISSIONS_COLLECTION)
 			.doc('percentages')
 			.update(updateObj)
 			.then(() => {
@@ -90,7 +97,24 @@ function useUsersList() {
 
 	function approveRequest(requestID) {
 		return firestore
-			.collection('requests')
+			.collection(REQUESTS_COLLECTION)
+			.doc(requestID)
+			.update({
+				status: 'approved',
+			})
+			.then(() => {
+				showSuccess('Статус заявки обновлен');
+			})
+			.catch((err) => {
+				console.error('Error:', err); // eslint-disable-line no-console
+				showError(err.message || 'Could not update request status');
+				return Promise.reject(err);
+			});
+	}
+
+	function approveWithdrawRequest(requestID) {
+		return firestore
+			.collection(WITHDRAWALS_COLLECTION)
 			.doc(requestID)
 			.update({
 				status: 'approved',
@@ -108,12 +132,14 @@ function useUsersList() {
 	return {
 		users,
 		requests,
+		withdrawalRequests,
 		commissions,
 		newDialogOpen,
 		toggleDialog,
 		updateUser,
 		updateCommissions,
 		approveRequest,
+		approveWithdrawRequest
 	};
 }
 
@@ -129,10 +155,12 @@ function AdminPage() {
 		requests,
 		commissions,
 		newDialogOpen,
+		withdrawalRequests,
 		toggleDialog,
 		updateUser,
 		updateCommissions,
 		approveRequest,
+		approveWithdrawRequest
 	} = useUsersList();
 
 	const [path, setPath] = useState('');
@@ -182,6 +210,10 @@ function AdminPage() {
 							<RequestsList
 								requests={requests}
 								approveRequest={approveRequest}
+							/>
+							<WithdrawsList
+								requests={withdrawalRequests}
+								approveRequest={approveWithdrawRequest}
 							/>
 						</CardContent>
 					</Card>
