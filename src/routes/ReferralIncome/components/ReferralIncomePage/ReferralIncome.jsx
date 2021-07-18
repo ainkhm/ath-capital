@@ -18,6 +18,7 @@ import RequestsList from '../ReferralsList';
 import CopyToClipboard from 'components/CopyToClipboard';
 import { SIGNUP_PATH, USERS_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
+import { COMMISSIONS_COLLECTION } from 'constants/firebasePaths';
 const useStyles = makeStyles(styles);
 
 function ReferralIncome() {
@@ -25,17 +26,29 @@ function ReferralIncome() {
 	const classes = useStyles();
 	// Get auth from redux state
 	const auth = useSelector(({ firebase: { auth } }) => auth);
+
+	useFirestoreConnect([
+		{
+			collection: COMMISSIONS_COLLECTION,
+		},
+	]);
+
+	// Get auth from redux state
 	const profile = useSelector(({ firebase: { profile } }) => profile);
-
-	const [path, setPath] = useState('');
-	const [userData, setUserData] = useState([]);
-
-	// Get projects from redux state
 	const commissions = useSelector(
 		({ firestore: { ordered } }) => ordered.commissions
 	);
 
-	console.log(commissions);
+	const incByLevel1 = profile?.level1?.length * commissions[0].level1
+	const incByLevel2 = profile?.level2?.length * commissions[0].level2
+	const incByLevel3 = profile?.level3?.length * commissions[0].level3
+
+	const percentIncrease = incByLevel1 + incByLevel2 + incByLevel3
+
+	console.log(percentIncrease, profile.wallet)
+
+	const [path, setPath] = useState('');
+	const [userData, setUserData] = useState([]);
 
 	useEffect(() => {
 		setPath(window.location.origin);
@@ -96,7 +109,7 @@ function ReferralIncome() {
 										Реферальный доход
 									</Typography>
 									<Typography component='h4' variant='h4'>
-										-
+										<Typography component='span' variant='subtitle2'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
 									</Typography>
 								</div>
 								<div>
