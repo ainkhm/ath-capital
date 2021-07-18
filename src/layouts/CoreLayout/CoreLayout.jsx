@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import DrawerContainer from 'components/Navbar/Drawer';
 import { useSelector } from 'react-redux';
 import { isEmpty, isLoaded } from 'react-redux-firebase';
+import { HOME_PATH } from 'constants/paths';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 function CoreLayout({ children }) {
 
   const classes = useStyles();
+  const location = useLocation();
 
   // Get auth from redux state
   const auth = useSelector(({ firebase }) => firebase.auth)
@@ -53,17 +56,23 @@ function CoreLayout({ children }) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <Navbar {...childProps} />
       {
-        authExists
-          ? <DrawerContainer {...childProps} />
-          : null
+        location.pathname !== HOME_PATH
+          ? <>
+            <CssBaseline />
+            <Navbar {...childProps} />
+            {
+              authExists
+                ? <DrawerContainer {...childProps} />
+                : null
+            }
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              {children}
+            </main>
+          </>
+          : children
       }
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
-      </main>
     </div>
   )
 }

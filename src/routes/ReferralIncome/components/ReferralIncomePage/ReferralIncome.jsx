@@ -109,7 +109,7 @@ function ReferralIncome() {
 										Реферальный доход
 									</Typography>
 									<Typography component='h4' variant='h4'>
-										<Typography component='span' variant='subtitle2'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
+										<Typography component='span' variant='subtitle1'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
 									</Typography>
 								</div>
 								<div>

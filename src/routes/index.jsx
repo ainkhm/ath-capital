@@ -16,7 +16,7 @@ export default function createRoutes() {
   return (
     <CoreLayout>
       <Switch>
-        <Route exact path={Home.path} component={() => <Redirect to={LOGIN_PATH} />} />
+        <Route exact path={Home.path} component={() => <Home.component />} />
         {
           // Build Route components from routeSettings
           [
