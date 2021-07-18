@@ -51,7 +51,7 @@ function ReferralIncome() {
 			for (let item of profile.level1) {
 				tempData.push({
 					email: item.email,
-					level: '1st',
+					level: '1',
 					amount: commissions && commissions[0].level1,
 				});
 			}
@@ -93,7 +93,7 @@ function ReferralIncome() {
 							<div className={classes.spaceBetween}>
 								<div>
 									<Typography color='textSecondary'>
-										Рееферальный доход
+										Реферальный доход
 									</Typography>
 									<Typography component='h4' variant='h4'>
 										-
@@ -111,7 +111,7 @@ function ReferralIncome() {
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							<Typography color='textSecondary'>Ваши заявки</Typography>
+							<Typography color='textSecondary'>Ваши реффералы</Typography>
 							<RequestsList userData={userData} />
 						</CardContent>
 					</Card>

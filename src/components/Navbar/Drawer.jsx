@@ -64,7 +64,7 @@ const DrawerContainer = (props) => {
 						<ListItemIcon>
 							<PersonIcon />
 						</ListItemIcon>
-						<ListItemText primary='Users' />
+						<ListItemText primary='Пользователи' />
 					</ListItem>
 				) : (
 					<>
@@ -84,7 +84,7 @@ const DrawerContainer = (props) => {
 							<ListItemIcon>
 								<ShareIcon />
 							</ListItemIcon>
-							<ListItemText primary='Рефферальная информ.' />
+							<ListItemText primary='Рефф. информация' />
 						</ListItem>
 					</>
 				)}

@@ -59,11 +59,11 @@ function useRequestsList() {
 				...newInstance,
 				createdBy: auth.uid,
 				createdAt: firestore.FieldValue.serverTimestamp(),
-				status: 'pending',
+				status: 'на рассмотрении',
 			})
 			.then(() => {
 				toggleDialog();
-				showSuccess('Request added successfully');
+				showSuccess('Заявка успешно отправлена');
 			})
 			.catch((err) => {
 				console.error('Error:', err); // eslint-disable-line no-console
