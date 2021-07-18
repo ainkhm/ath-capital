@@ -1,127 +1,124 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import {
-  useFirestore,
-  useFirestoreConnect,
-  isLoaded,
-  isEmpty
-} from 'react-redux-firebase'
-import { useSelector } from 'react-redux'
-import LoadingSpinner from 'components/LoadingSpinner'
-import styles from './ReferralIncome.styles'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-import RequestsList from '../ReferralsList'
-import CopyToClipboard from 'components/CopyToClipboard'
-import { SIGNUP_PATH, USERS_PATH } from 'constants/paths'
-import { Redirect } from 'react-router-dom'
-const useStyles = makeStyles(styles)
-
+	useFirestore,
+	useFirestoreConnect,
+	isLoaded,
+	isEmpty,
+} from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import LoadingSpinner from 'components/LoadingSpinner';
+import styles from './ReferralIncome.styles';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import RequestsList from '../ReferralsList';
+import CopyToClipboard from 'components/CopyToClipboard';
+import { SIGNUP_PATH, USERS_PATH } from 'constants/paths';
+import { Redirect } from 'react-router-dom';
+const useStyles = makeStyles(styles);
 
 function ReferralIncome() {
-  const firestore = useFirestore()
-  const classes = useStyles()
-  // Get auth from redux state
-  const auth = useSelector(({ firebase: { auth } }) => auth)
-  const profile = useSelector(({ firebase: { profile } }) => profile)
+	const firestore = useFirestore();
+	const classes = useStyles();
+	// Get auth from redux state
+	const auth = useSelector(({ firebase: { auth } }) => auth);
+	const profile = useSelector(({ firebase: { profile } }) => profile);
 
-  const [path, setPath] = useState('')
-  const [userData, setUserData] = useState([])
+	const [path, setPath] = useState('');
+	const [userData, setUserData] = useState([]);
 
+	// Get projects from redux state
+	const commissions = useSelector(
+		({ firestore: { ordered } }) => ordered.commissions
+	);
 
-  // Get projects from redux state
-  const commissions = useSelector(({ firestore: { ordered } }) => ordered.commissions)
+	console.log(commissions);
 
-  console.log(commissions)
+	useEffect(() => {
+		setPath(window.location.origin);
+	}, []);
 
+	useEffect(() => {
+		mapUserData();
+	}, [profile]);
 
-  useEffect(() => {
-    setPath(window.location.origin)
-  }, [])
+	const mapUserData = () => {
+		const tempData = [];
+		if (profile.level1) {
+			for (let item of profile.level1) {
+				tempData.push({
+					email: item.email,
+					level: '1st',
+					amount: commissions && commissions[0].level1,
+				});
+			}
+		}
+		if (profile.level2) {
+			for (let item of profile.level2) {
+				tempData.push({
+					email: item.email,
+					level: '2nd',
+					amount: commissions && commissions[0].level2,
+				});
+			}
+		}
+		if (profile.level3) {
+			for (let item of profile.level3) {
+				tempData.push({
+					email: item.email,
+					level: '3rd',
+					amount: commissions && commissions[0].level3,
+				});
+			}
+		}
+		setUserData(tempData);
+	};
 
-  useEffect(() => {
-    mapUserData()
-  }, [profile])
+	// Show spinner while projects are loading
+	if (!isLoaded(profile) || !isLoaded(commissions)) {
+		return <LoadingSpinner />;
+	}
 
-  const mapUserData = () => {
-    const tempData = []
-    if (profile.level1) {
-
-      for (let item of profile.level1) {
-        tempData.push({
-          email: item.email,
-          level: '1st',
-          amount: commissions && commissions[0].level1
-        })
-      }
-    }
-    if (profile.level2) {
-      for (let item of profile.level2) {
-        tempData.push({
-          email: item.email,
-          level: '2nd',
-          amount: commissions && commissions[0].level2
-        })
-      }
-    }
-    if (profile.level3) {
-      for (let item of profile.level3) {
-        tempData.push({
-          email: item.email,
-          level: '3rd',
-          amount: commissions && commissions[0].level3
-        })
-      }
-    }
-    setUserData(tempData)
-  }
-
-  // Show spinner while projects are loading
-  if (!isLoaded(profile) || !isLoaded(commissions)) {
-    return <LoadingSpinner />
-  }
-
-
-  return profile.role === "admin"
-    ? <Redirect to={USERS_PATH} />
-    : (<div className={classes.root}>
-
-      <Grid container spacing={3} className={classes.container}>
-        <Grid item xs={12} >
-          <Card className={classes.card} variant="outlined">
-            <CardContent>
-              <div className={classes.spaceBetween}>
-                <div>
-                  <Typography color="textSecondary">
-                    Referral Income
-                  </Typography>
-                  <Typography component='h4' variant='h4'>
-                    -
-                  </Typography>
-                </div>
-                <div>
-                  <CopyToClipboard text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} >
-          <Card className={classes.card} variant="outlined">
-            <CardContent>
-              <Typography color="textSecondary">
-                Your Requests
-              </Typography>
-              <RequestsList userData={userData} />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </div>
-    )
+	return profile.role === 'admin' ? (
+		<Redirect to={USERS_PATH} />
+	) : (
+		<div className={classes.root}>
+			<Grid container spacing={3} className={classes.container}>
+				<Grid item xs={12}>
+					<Card className={classes.card} variant='outlined'>
+						<CardContent>
+							<div className={classes.spaceBetween}>
+								<div>
+									<Typography color='textSecondary'>
+										Рееферальный доход
+									</Typography>
+									<Typography component='h4' variant='h4'>
+										-
+									</Typography>
+								</div>
+								<div>
+									<CopyToClipboard
+										text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
+									/>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
+				</Grid>
+				<Grid item xs={12}>
+					<Card className={classes.card} variant='outlined'>
+						<CardContent>
+							<Typography color='textSecondary'>Ваши заявки</Typography>
+							<RequestsList userData={userData} />
+						</CardContent>
+					</Card>
+				</Grid>
+			</Grid>
+		</div>
+	);
 }
 
-export default ReferralIncome
+export default ReferralIncome;
