@@ -22,6 +22,7 @@ import { USERS_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
 import NewWithdrawalDialog from '../NewWithdrawalDialog';
 import WithdrawsList from '../WithdrawsList';
+import { PENDING_STATUS } from 'constants/statuses';
 
 const useStyles = makeStyles(styles);
 
@@ -99,7 +100,7 @@ function useRequestsList() {
 				...newInstance,
 				createdBy: auth.uid,
 				createdAt: firestore.FieldValue.serverTimestamp(),
-				status: 'на рассмотрении',
+				status: PENDING_STATUS,
 			})
 			.then(() => {
 				toggleDialog();
@@ -121,7 +122,7 @@ function useRequestsList() {
 				...newInstance,
 				createdBy: auth.uid,
 				createdAt: firestore.FieldValue.serverTimestamp(),
-				status: 'на рассмотрении',
+				status: PENDING_STATUS,
 			})
 			.then(() => {
 				toggleWithdrawalDialog();
@@ -191,6 +192,7 @@ function ProjectsList() {
 				onSubmit={addWithdrawRequests}
 				open={withdrawalOpen}
 				onRequestClose={toggleWithdrawalDialog}
+				validationAmount={compoundPrice}
 			/>
 			<Grid container spacing={3} className={classes.container}>
 				<Grid item xs={12}>
@@ -227,10 +229,29 @@ function ProjectsList() {
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							<Typography color='textSecondary'>Ваши заявки</Typography>
-							<RequestsList requests={requests} />
+							{(requests || []).length > 0
+								? <>
+									<Typography color='textSecondary'>Ваши заявки</Typography>
+									<RequestsList requests={requests} />
+								</>
+								: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
 
-							<WithdrawsList requests={withdrawalRequests} />
+							}
+
+						</CardContent>
+					</Card>
+				</Grid>
+				<Grid item xs={12}>
+					<Card className={classes.card} variant='outlined'>
+						<CardContent>
+							{(withdrawalRequests || []).length > 0
+								? <>
+									<Typography color='textSecondary'>Ваши заявки</Typography>
+
+									<WithdrawsList requests={withdrawalRequests} />
+								</>
+								: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
+							}
 						</CardContent>
 					</Card>
 				</Grid>

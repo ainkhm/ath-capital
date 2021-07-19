@@ -48,7 +48,7 @@ export default function BasicTable({
 							<TableCell>{row.email}</TableCell>
 							<TableCell>{row.role}</TableCell>
 							<TableCell>{row.wallet}</TableCell>
-							<TableCell>
+							<TableCell align='right'>
 								<Button
 									variant='contained'
 									color='primary'

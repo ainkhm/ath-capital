@@ -8,13 +8,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 // import Paper from '@material-ui/core/Paper';
 import styles from './WithdrawsList.styles';
+import RequestStatus from 'components/RequestStatus/RequestStatus';
 
 const useStyles = makeStyles(styles);
 
 export default function BasicTable(props) {
 	const classes = useStyles();
 
-	return props?.requests?.length > 0 ? (
+	return (
 		<TableContainer component={'div'}>
 			<Table className={classes.table} aria-label='simple table'>
 				<TableHead>
@@ -25,17 +26,17 @@ export default function BasicTable(props) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{props.requests.map((row, index) => (
+					{props?.requests?.map((row, index) => (
 						<TableRow key={index}>
 							<TableCell>{row.address}</TableCell>
 							<TableCell>{row.amount}</TableCell>
-							<TableCell>{row.status}</TableCell>
+							<TableCell>
+								<RequestStatus status={row.status} />
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
 		</TableContainer>
-	) : (
-		<p>Нет заявок</p>
-	);
+	)
 }

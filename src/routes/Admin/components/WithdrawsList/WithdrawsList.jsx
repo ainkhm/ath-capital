@@ -9,10 +9,15 @@ import TableRow from '@material-ui/core/TableRow';
 // import Paper from '@material-ui/core/Paper';
 import styles from './WithdrawsList.styles';
 import Button from '@material-ui/core/Button';
+import { WITHDRAWALS_COLLECTION } from 'constants/firebasePaths';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Chip from '@material-ui/core/Chip';
+import RequestStatus from 'components/RequestStatus/RequestStatus';
 
 const useStyles = makeStyles(styles);
 
-export default function BasicTable({ requests, approveRequest }) {
+export default function BasicTable({ requests, approveRequest, rejectRequest, deleteRequest }) {
 	const classes = useStyles();
 
 	return (
@@ -31,19 +36,39 @@ export default function BasicTable({ requests, approveRequest }) {
 						<TableRow key={index}>
 							<TableCell>{row.address}</TableCell>
 							<TableCell>{row.amount}</TableCell>
-							<TableCell>{row.status}</TableCell>
 							<TableCell>
+								<RequestStatus status={row.status} />
+							</TableCell>
+							<TableCell align="right">
 								{row.status === 'на рассмотрении' ? (
-									<Button
-										variant='contained'
-										color='primary'
-										onClick={() => {
-											approveRequest(row.id);
-										}}
-									>
-										Подтвердить
-									</Button>
+									<>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={() => {
+												approveRequest(WITHDRAWALS_COLLECTION, row.id);
+											}}
+											style={{ marginRight: 15 }}
+										>
+											Подтвердить
+										</Button>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={() => {
+												rejectRequest(WITHDRAWALS_COLLECTION, row.id);
+											}}
+											style={{ marginRight: 15 }}
+										>
+											Отклонять
+										</Button>
+									</>
 								) : null}
+								<IconButton aria-label="delete" onClick={() => {
+									deleteRequest(WITHDRAWALS_COLLECTION, row.id);
+								}}>
+									<DeleteIcon />
+								</IconButton>
 							</TableCell>
 						</TableRow>
 					))}

@@ -9,10 +9,14 @@ import TableRow from '@material-ui/core/TableRow';
 // import Paper from '@material-ui/core/Paper';
 import styles from './RequestsList.styles';
 import Button from '@material-ui/core/Button';
+import { REQUESTS_COLLECTION } from 'constants/firebasePaths';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import RequestStatus from 'components/RequestStatus/RequestStatus';
 
 const useStyles = makeStyles(styles);
 
-export default function BasicTable({ requests, approveRequest }) {
+export default function BasicTable({ requests, approveRequest, rejectRequest, deleteRequest }) {
 	const classes = useStyles();
 
 	return (
@@ -35,19 +39,39 @@ export default function BasicTable({ requests, approveRequest }) {
 							<TableCell>{row.receiver}</TableCell>
 							<TableCell>{row.dateTime}</TableCell>
 							<TableCell>{row.url}</TableCell>
-							<TableCell>{row.status}</TableCell>
 							<TableCell>
+								<RequestStatus status={row.status} />
+							</TableCell>
+							<TableCell align="right">
 								{row.status === 'на рассмотрении' ? (
-									<Button
-										variant='contained'
-										color='primary'
-										onClick={() => {
-											approveRequest(row.id);
-										}}
-									>
-										Подтвердить
-									</Button>
+									<>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={() => {
+												approveRequest(REQUESTS_COLLECTION, row.id);
+											}}
+											style={{ marginRight: 15 }}
+										>
+											Подтвердить
+										</Button>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={() => {
+												rejectRequest(REQUESTS_COLLECTION, row.id);
+											}}
+											style={{ marginRight: 15 }}
+										>
+											Отклонять
+										</Button>
+									</>
 								) : null}
+								<IconButton aria-label="delete" onClick={() => {
+									deleteRequest(REQUESTS_COLLECTION, row.id);
+								}}>
+									<DeleteIcon />
+								</IconButton>
 							</TableCell>
 						</TableRow>
 					))}

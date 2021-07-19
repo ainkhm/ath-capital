@@ -26,6 +26,7 @@ import {
 import Commissions from '../Commissions';
 import { LIST_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
+import { APPROVED_STATUS, REJECTED_STATUS } from 'constants/statuses';
 const useStyles = makeStyles(styles);
 
 function useUsersList() {
@@ -95,12 +96,12 @@ function useUsersList() {
 			});
 	}
 
-	function approveRequest(requestID) {
+	function approveRequest(collection, requestID) {
 		return firestore
-			.collection(REQUESTS_COLLECTION)
+			.collection(collection)
 			.doc(requestID)
 			.update({
-				status: 'approved',
+				status: APPROVED_STATUS,
 			})
 			.then(() => {
 				showSuccess('Статус заявки обновлен');
@@ -112,12 +113,12 @@ function useUsersList() {
 			});
 	}
 
-	function approveWithdrawRequest(requestID) {
+	function rejectRequest(collection, requestID) {
 		return firestore
-			.collection(WITHDRAWALS_COLLECTION)
+			.collection(collection)
 			.doc(requestID)
 			.update({
-				status: 'approved',
+				status: REJECTED_STATUS,
 			})
 			.then(() => {
 				showSuccess('Статус заявки обновлен');
@@ -125,6 +126,21 @@ function useUsersList() {
 			.catch((err) => {
 				console.error('Error:', err); // eslint-disable-line no-console
 				showError(err.message || 'Could not update request status');
+				return Promise.reject(err);
+			});
+	}
+
+	function deleteRequest(collection, requestID) {
+		return firestore
+			.collection(collection)
+			.doc(requestID)
+			.delete()
+			.then(() => {
+				showSuccess('заявки удалено');
+			})
+			.catch((err) => {
+				console.error('Error:', err); // eslint-disable-line no-console
+				showError(err.message || 'Could not delete request');
 				return Promise.reject(err);
 			});
 	}
@@ -139,7 +155,8 @@ function useUsersList() {
 		updateUser,
 		updateCommissions,
 		approveRequest,
-		approveWithdrawRequest
+		rejectRequest,
+		deleteRequest
 	};
 }
 
@@ -160,7 +177,8 @@ function AdminPage() {
 		updateUser,
 		updateCommissions,
 		approveRequest,
-		approveWithdrawRequest
+		rejectRequest,
+		deleteRequest
 	} = useUsersList();
 
 	const [path, setPath] = useState('');
@@ -193,28 +211,61 @@ function AdminPage() {
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							<Typography color='textSecondary'>Users</Typography>
-							<UsersList
-								users={users}
-								updateUser={updateUser}
-								newDialogOpen={newDialogOpen}
-								toggleDialog={toggleDialog}
-							/>
+							{
+								users.length > 0
+									? <>
+										<Typography color='textSecondary'>Users</Typography>
+										<UsersList
+											users={users}
+											updateUser={updateUser}
+											newDialogOpen={newDialogOpen}
+											toggleDialog={toggleDialog}
+										/>
+									</>
+									: <Typography variant='h5' style={{ textAlign: 'center' }}>No Users</Typography>
+
+							}
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							<Typography color='textSecondary'>User Requests</Typography>
-							<RequestsList
-								requests={requests}
-								approveRequest={approveRequest}
-							/>
-							<WithdrawsList
-								requests={withdrawalRequests}
-								approveRequest={approveWithdrawRequest}
-							/>
+							{
+								(requests || []).length > 0
+									? <>
+										<Typography color='textSecondary'>User Requests</Typography>
+										<RequestsList
+											requests={requests}
+											approveRequest={approveRequest}
+											rejectRequest={rejectRequest}
+											deleteRequest={deleteRequest}
+										/>
+									</>
+									: <Typography Typography variant='h5' style={{ textAlign: 'center' }}>No  Requests</Typography>
+
+							}
+						</CardContent>
+					</Card>
+				</Grid>
+				<Grid item xs={12}>
+					<Card className={classes.card} variant='outlined'>
+						<CardContent>
+							{
+								(withdrawalRequests || []).length > 0
+									? <>
+										<Typography color='textSecondary'>Withdrawal Requests</Typography>
+										<WithdrawsList
+											requests={withdrawalRequests}
+											approveRequest={approveRequest}
+											rejectRequest={rejectRequest}
+											deleteRequest={deleteRequest}
+										/>
+									</>
+									: <Typography variant='h5' style={{ textAlign: 'center' }}>No Withdrawal Requests</Typography>
+
+							}
+
 						</CardContent>
 					</Card>
 				</Grid>

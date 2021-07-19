@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +15,7 @@ function NewWithdrawalDialog({
 	onSubmit,
 	open,
 	onRequestClose,
+	validationAmount
 }) {
 	const classes = useStyles();
 	const {
@@ -22,6 +23,10 @@ function NewWithdrawalDialog({
 		handleSubmit,
 		formState: { isSubmitting, isValid, errors },
 	} = useForm({ mode: 'onChange' });
+
+	useEffect(() => {
+		console.log(errors.amount)
+	}, [errors.amount])
 
 	return (
 		<Dialog open={open} onClose={onRequestClose}>
@@ -47,13 +52,14 @@ function NewWithdrawalDialog({
 					/>
 					<TextField
 						error={!!errors.amount}
-						helperText={errors.amount && 'Введите сумму вывода'}
+						helperText={errors.amount && errors.amount.type === 'max' ? 'Введите сумму вывода меньше или равную USDT ' + validationAmount : 'Введите сумму вывода'}
 						label='Сумма вывода'
 						type="number"
 						inputProps={{
 							tabIndex: '2',
 							...register('amount', {
 								required: true,
+								max: validationAmount
 							}),
 						}}
 						margin='normal'
