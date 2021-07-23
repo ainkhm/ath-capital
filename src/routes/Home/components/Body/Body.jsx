@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Body() {
+	const history = useHistory();
 	return (
 		<>
 			<section className='customers'>
@@ -30,7 +31,7 @@ function Body() {
 					<img src='assets/spotify-logobar-svg.svg' alt='Spotify logo' />
 				</div>
 			</section>
-			<section className='features'>
+			<section id='features' className='features'>
 				<div className='features-item'>
 					<div className='features-icon'>
 						<img src='assets/icon_world_green.svg' alt='Green world icon' />
@@ -41,10 +42,10 @@ function Body() {
 							Пассивный доход - не выдумка, а новая реальность. Инвестируй и
 							зарабатывай вместе с нами
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Инвестировать
 							<i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 				</div>
 				<div className='features-item'>
@@ -60,10 +61,10 @@ function Body() {
 							Авторский алгоритм вложения средств на основе ИИ позволяет
 							избежать рисков валютной инфляции и приумножать капитал
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							О алгоритме
 							<i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 				</div>
 				<div className='features-item'>
@@ -79,9 +80,9 @@ function Body() {
 							Наши эксперты по формированию инвестиционных портфелей помогут
 							определить наиболее выгодное предложение для каждого
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Начать сейчас <i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 				</div>
 				<div />
@@ -95,14 +96,14 @@ function Body() {
 						системе. Клиент сам вправе распоряжаться вложенными деньгами и
 						прыбилью.
 					</p>
-					<a href='#' className='link-green'>
+					{/* <a href='#' className='link-green'>
 						Узнать больше о платформе
 						<i className='fas fa-angle-right' />
-					</a>
+					</a> */}
 				</div>
 			</section>
 			<section className='payments'>
-				<div className='payments-item'>
+				{/* <div className='payments-item'>
 					<img
 						src='assets/homepage-payment-methods-EN.gif'
 						alt='Various payment method checkouts'
@@ -116,8 +117,8 @@ function Body() {
 					<a href='#' className='link-green'>
 						Узнать больше <i className='fas fa-angle-right' />
 					</a>
-				</div>
-				<div className='payments-item'>
+				</div> */}
+				{/* <div className='payments-item'>
 					<img
 						src='assets/Group50378.jpg'
 						alt='Point of sale payment terminal and digital wallet'
@@ -131,9 +132,9 @@ function Body() {
 					<a href='#' className='link-green'>
 						Узнать больше <i className='fas fa-angle-right' />
 					</a>
-				</div>
+				</div> */}
 			</section>
-			<section className='transactions'>
+			<section id='transactions' className='transactions'>
 				<div className='transactions-main'>
 					<div className='transactions-main-item'>
 						<video
@@ -153,12 +154,15 @@ function Body() {
 						</video>
 					</div>
 					<div className='transactions-main-item'>
-						<h2>Делайте больше транзакций</h2>
+						<h2>О нас</h2>
 						<p>
-							Получите больше подтверждений для каждого отдельного платежа с
-							помощью локальной и глобальной обработки платежей, оптимизации на
-							основе данных и мощного управления рисками. Все в рамках полностью
-							подключенной единой платежной системы.
+							Наш инвестиционный фонд ATH capital работает с 2015 года. Не
+							смотря на небольшую команду из 33 трейдеров, мы успешно торгуем с
+							помощью торгового алгоритма на основе Искусственного Интеллекта
+							(AI) и имеем общую доходность в более 15% в месяц с момента
+							существования фонда. Наша доходность формируется за счёт торговли
+							на криптовалютных биржах, а также инвестиций в криптовалютные
+							проекты и активы.
 						</p>
 					</div>
 				</div>
@@ -170,9 +174,9 @@ function Body() {
 						/>
 						<h4>Методы оплаты</h4>
 						<p>Предлагаем способы оплаты, которым доверяют</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Узнать больше <i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 					<div className='transactions-feature-item'>
 						<img
@@ -181,12 +185,12 @@ function Body() {
 						/>
 						<h4>Консультации</h4>
 						<p>
-							Глобальная обработка платежей, адаптированная к вам, с более
-							низкими комиссиями.
+							Глобальная обработка выплат, адаптированная к вам, с более низкими
+							комиссиями.
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Узнать больше <i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 					<div className='transactions-feature-item'>
 						<img
@@ -198,9 +202,9 @@ function Body() {
 							Получайте больше дохода, используя данные и машинное обучение для
 							каждого платежа.
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Узнать больше <i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 					<div className='transactions-feature-item'>
 						<img
@@ -209,30 +213,32 @@ function Body() {
 						/>
 						<h4>Безопасность и удобство</h4>
 						<p>
-							применяем подход на основе данных для блокировки мошенников и
+							Мы применяем подход на основе данных для блокировки мошенников и
 							управления рисками.
 						</p>
-						<a href='#' className='link-green'>
+						{/* <a href='#' className='link-green'>
 							Узнать больше <i className='fas fa-angle-right' />
-						</a>
+						</a> */}
 					</div>
 				</div>
 			</section>
-			<section className='reports'>
+			<section id='algoritm' className='reports'>
 				<div className='reports-item'>
-					<h2>Мы знаем, что вам нужно.</h2>
+					<h2>Зачем нам это всё?</h2>
 					<p>
-						Получите лучшее представление обо всем своем доходе с помощью
-						подробных аналитических данных и отчетов в одном месте.{' '}
+						Мы зарабатываем от объема средств. Предложенная нами стратегия
+						выигрышная для всех! Вы получаете половину от доходности фонда без
+						задержек и в полном объеме. Прозрачная аналитика по доходности Ваших
+						инвестиций доступна в личном кабинете пользователя.{' '}
 					</p>
 					<div className='reports-item-features'>
 						<div className='reports-item-fearures-item'>
 							<img src='assets/rules-icon-20.svg' alt='Daily tasks' />
-							<h4>Ежеднывные задачи</h4>
+							<h4>Ежедневные выплаты</h4>
 							<p>Легко выполняем такие задачи, как возврат средств.</p>
-							<a href='#' className='link-green'>
+							{/* <a href='#' className='link-green'>
 								Learn more <i className='fas fa-angle-right' />
-							</a>
+							</a> */}
 						</div>
 						<div className='reports-item-fearures-item'>
 							<img
@@ -254,12 +260,19 @@ function Body() {
 			</section>
 			<section className='companies'>
 				<div className='companies-heading'>
-					<h2>Работаем с компаниями и большими идеями</h2>
-					<a href='#' className='link-green'>
+					<h2>Об алгоритме</h2>
+					<p>
+						Знания и понимание криптовалютного рынка наших трейдеров были
+						внедрены в алгоритм на основе Искусственного Интеллекта, что
+						гарантирует отсутствие ошибок и эмоциональных решений. Алгоритм не
+						заточен на рискованные сделки, обеспечивающий стабильный рост
+						активов.
+					</p>
+					{/* <a href='#' className='link-green'>
 						Посмотрите, с кем мы работаем <i className='fas fa-angle-right' />
-					</a>
+					</a> */}
 				</div>
-				<div className='companies-main'>
+				{/* <div className='companies-main'>
 					<div className='companies-main-item-1'>
 						<video
 							video__selfhosted
@@ -320,14 +333,15 @@ function Body() {
 							Смотреть видео сейчас
 						</a>
 					</div>
-				</div>
+				</div> */}
 				<div className='sm-slider'>
 					<div className='sm-slider-nav'>
 						<span className='sm-slider-btn' />
 						<span className='sm-slider-btn' />
 						<span className='sm-slider-btn' />
 					</div>
-					<div className='companies-features'>
+
+					{/* <div className='companies-features'>
 						<div
 							className='companies-features-item companies-features-item-left'
 							ontouchmove='slide(0)'
@@ -364,12 +378,16 @@ function Body() {
 								Узнать больше <i className='fas fa-angle-right' />
 							</a>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</section>
 			<section className='account'>
 				<h3>Начните ваше путешествие с ATH capital сегодня</h3>
-				<a className='btn-primary-black' href='#'>
+				<a
+					className='btn-primary-black'
+					href='#'
+					onClick={() => history.push('/signup')}
+				>
 					Создать аккаунт
 				</a>
 			</section>
