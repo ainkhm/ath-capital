@@ -12,16 +12,16 @@ function Navbar() {
 						</a>
 					</li>
 					<li>
-						<a href='#features'>Преимущества</a>
+						<a href='https://ath-capital.web.app/#features'>Преимущества</a>
 					</li>
 					<li>
-						<a href='#transactions'>О нас</a>
+						<a href='https://ath-capital.web.app/#transactions'>О нас</a>
 					</li>
 					<li>
-						<a href='#algoritm'>Алгортм</a>
+						<a href='https://ath-capital.web.app/#algoritm'>Алгортм</a>
 					</li>
 					<li>
-						<a href='#'>Публичная оферта</a>
+						<Link to='/policy'> Публичная оферта</Link>
 					</li>
 				</ul>
 				{/* <ul className="footer-link">

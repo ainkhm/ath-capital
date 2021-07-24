@@ -128,6 +128,9 @@ ul li {
 .menu-item:hover {
 	border-top: 4px solid var(--green);
 }
+#section-policy {
+	padding: 5% 0;
+}
 
 .main_menu-right .menu-item:last-child:hover {
 	border-top: 4px solid transparent;

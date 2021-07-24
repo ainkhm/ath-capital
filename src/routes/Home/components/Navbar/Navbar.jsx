@@ -7,20 +7,23 @@ function Navbar() {
 	return (
 		<nav className='main_menu'>
 			<div className='logo'>
-				<a href='#'>
+				<a href='https://ath-capital.web.app/'>
 					<img src='assets/logo.png'></img>
 				</a>
 			</div>
 			<div className='links'>
 				<ul className='main_menu-left'>
 					<li className='menu-item'>
-						<a href='#features'>Преимущества</a>
+						<a href='https://ath-capital.web.app/#features'>Преимущества</a>
 					</li>
 					<li className='menu-item'>
-						<a href='#transactions'>О нас</a>
+						<a href='https://ath-capital.web.app/#transactions'>О нас</a>
 					</li>
 					<li className='menu-item'>
-						<a href='#algoritm'>Алгоритм</a>
+						<a href='https://ath-capital.web.app/#algoritm'>Алгоритм</a>
+					</li>
+					<li className='menu-item'>
+						<Link to='/policy'> Публичная оферта</Link>
 					</li>
 				</ul>
 				<ul className='main_menu-right'>
