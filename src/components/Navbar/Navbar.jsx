@@ -31,8 +31,7 @@ function Navbar(props) {
 				{...props}
 			>
 				{authExists ? (
-					// <AccountMenu />
-					<p>{profile.email}</p>
+					<p style={{ padding: 0 }}>{profile.email}</p>
 				) : (
 					<Button
 						className={classes.signIn}

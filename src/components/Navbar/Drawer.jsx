@@ -37,6 +37,8 @@ const DrawerContainer = (props) => {
 
 	// Get auth from redux state
 	const auth = useSelector(({ firebase: { profile } }) => profile);
+	const isVerified = useSelector(({ firebase }) => firebase.auth.emailVerified)
+
 
 	return (
 		<Drawer
@@ -59,36 +61,43 @@ const DrawerContainer = (props) => {
 			</div>
 			<Divider />
 			<List>
-				{auth.role === ADMIN ? (
-					<ListItem button onClick={() => history.push(USERS_PATH)}>
-						<ListItemIcon>
-							<PersonIcon />
-						</ListItemIcon>
-						<ListItemText primary='Пользователи' />
-					</ListItem>
-				) : (
-					<>
-						<ListItem button onClick={() => history.push(LIST_PATH)}>
-							<ListItemIcon>
-								<DashboardIcon />
-							</ListItemIcon>
-							<ListItemText primary='Кабинет' />
-						</ListItem>
-						<ListItem button onClick={() => history.push(WALLET_PATH)}>
-							<ListItemIcon>
-								<AccountBalanceWalletIcon />
-							</ListItemIcon>
-							<ListItemText primary='Кошелек' />
-						</ListItem>
-						<ListItem button onClick={() => history.push(REFERRAL_INCOME_PATH)}>
-							<ListItemIcon>
-								<ShareIcon />
-							</ListItemIcon>
-							<ListItemText primary='Рефф. информация' />
-						</ListItem>
-					</>
-				)}
-				<Divider />
+				{
+					auth.role === ADMIN ? (
+						<>
+							<ListItem button onClick={() => history.push(USERS_PATH)}>
+								<ListItemIcon>
+									<PersonIcon />
+								</ListItemIcon>
+								<ListItemText primary='Пользователи' />
+							</ListItem>
+							<Divider />
+						</>
+					) : isVerified
+						? (
+							<>
+								<ListItem button onClick={() => history.push(LIST_PATH)}>
+									<ListItemIcon>
+										<DashboardIcon />
+									</ListItemIcon>
+									<ListItemText primary='Кабинет' />
+								</ListItem>
+								<ListItem button onClick={() => history.push(WALLET_PATH)}>
+									<ListItemIcon>
+										<AccountBalanceWalletIcon />
+									</ListItemIcon>
+									<ListItemText primary='Кошелек' />
+								</ListItem>
+								<ListItem button onClick={() => history.push(REFERRAL_INCOME_PATH)}>
+									<ListItemIcon>
+										<ShareIcon />
+									</ListItemIcon>
+									<ListItemText primary='Рефф. информация' />
+								</ListItem>
+								<Divider />
+
+							</>
+						)
+						: null}
 				<ListItem button onClick={firebase.logout}>
 					<ListItemIcon>
 						<ExitToAppIcon />
