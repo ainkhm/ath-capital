@@ -103,21 +103,22 @@ function ReferralIncome() {
 					<Grid item xs={12}>
 						<Card className={classes.card} variant='outlined'>
 							<CardContent>
-								<div className={classes.spaceBetween}>
-									<div>
+								<Grid container spacing={3} className={classes.spaceBetween}>
+									<Grid item xs={12} md={16}>
 										<Typography color='textSecondary'>
 											Реферальный доход
 										</Typography>
 										<Typography component='h4' variant='h4'>
 											<Typography component='span' variant='subtitle1'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
 										</Typography>
-									</div>
-									<div>
+									</Grid>
+									<Grid item xs={12} md={16}>
+
 										<CopyToClipboard
 											text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
 										/>
-									</div>
-								</div>
+									</Grid>
+								</Grid>
 							</CardContent>
 						</Card>
 					</Grid>

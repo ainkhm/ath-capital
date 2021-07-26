@@ -14,6 +14,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Chip from '@material-ui/core/Chip';
 import RequestStatus from 'components/RequestStatus/RequestStatus';
+import CancelIcon from '@material-ui/icons/Cancel';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(styles);
 
@@ -39,10 +41,10 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 							<TableCell>
 								<RequestStatus status={row.status} />
 							</TableCell>
-							<TableCell align="right">
+							<TableCell align="right" className={classes.actions}>
 								{row.status === 'на рассмотрении' ? (
 									<>
-										<Button
+										{/* <Button
 											variant='contained'
 											color='primary'
 											onClick={() => {
@@ -61,7 +63,17 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 											style={{ marginRight: 15 }}
 										>
 											Отклонять
-										</Button>
+										</Button> */}
+										<IconButton aria-label="delete" onClick={() => {
+											approveRequest(WITHDRAWALS_COLLECTION, row.id);
+										}}>
+											<CheckCircleIcon />
+										</IconButton>
+										<IconButton aria-label="delete" onClick={() => {
+											rejectRequest(WITHDRAWALS_COLLECTION, row.id);
+										}}>
+											<CancelIcon />
+										</IconButton>
 									</>
 								) : null}
 								<IconButton aria-label="delete" onClick={() => {
