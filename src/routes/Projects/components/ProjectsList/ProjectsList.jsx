@@ -122,48 +122,58 @@ function ProjectsList() {
 						</CardContent>
 					</Card>
 				</Grid>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<Typography
-								className={classes.title}
-								color='textSecondary'
-								gutterBottom
-							>
-								Реффералов за всё время
-							</Typography>
-							<ReferralChart />
-						</CardContent>
-					</Card>
-				</Grid>
-				<Grid item xs={12} md={6}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<Typography
-								className={classes.title}
-								color='textSecondary'
-								gutterBottom
-							>
-								Ваши реффералы
-							</Typography>
-							<ReferredUser />
-						</CardContent>
-					</Card>
-				</Grid>
-				<Grid item xs={12} md={6}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<Typography
-								className={classes.title}
-								color='textSecondary'
-								gutterBottom
-							>
-								Откуда приходят ваши рефералы
-							</Typography>
-							<ReferralsGraph />
-						</CardContent>
-					</Card>
-				</Grid>
+				{
+					projects.length > 0
+						? <>
+							<Grid item xs={12}>
+								<Card className={classes.card} variant='outlined'>
+									<CardContent>
+										<Typography
+											className={classes.title}
+											color='textSecondary'
+											gutterBottom
+										>
+											Реффералов за всё время
+										</Typography>
+										<ReferralChart />
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item xs={12} md={6}>
+								<Card className={classes.card} variant='outlined'>
+									<CardContent>
+										<Typography
+											className={classes.title}
+											color='textSecondary'
+											gutterBottom
+										>
+											Ваши реффералы
+										</Typography>
+										<ReferredUser />
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item xs={12} md={6}>
+								<Card className={classes.card} variant='outlined'>
+									<CardContent>
+										<Typography
+											className={classes.title}
+											color='textSecondary'
+											gutterBottom
+										>
+											Откуда приходят ваши рефералы
+										</Typography>
+										<ReferralsGraph />
+									</CardContent>
+								</Card>
+							</Grid>
+
+						</>
+						:
+						<Grid item xs={12} style={{ marginTop: 40 }}>
+							<Typography variant='h5' style={{ textAlign: 'center' }}>No referral Data</Typography>
+						</Grid>
+				}
 			</Grid>
 		</div>
 	);
