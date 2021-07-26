@@ -27,9 +27,7 @@ function NavbarWithoutAuth({ children, brandPath = '/', handleDrawerOpen, open }
   const authExists = isLoaded(auth) && !isEmpty(auth)
 
   return (
-    <AppBar position="fixed" className={clsx(classes.appBar, {
-      [classes.appBarShift]: open,
-    })}>
+    <AppBar position="fixed" className={clsx(classes.appBar)}>
       <Toolbar>
         {
           authExists
