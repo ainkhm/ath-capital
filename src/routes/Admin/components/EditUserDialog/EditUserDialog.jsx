@@ -26,7 +26,7 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
 
 	useEffect(() => {
 		setValue('email', selectedUser.email);
-		setValue('username', selectedUser.username);
+		setValue('username', selectedUser.displayName);
 		setValue('role', selectedUser.role);
 		setValue('wallet', selectedUser.wallet);
 	}, [selectedUser]);

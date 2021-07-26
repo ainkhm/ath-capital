@@ -44,7 +44,7 @@ export default function BasicTable({
 				<TableBody>
 					{users.map((row, index) => (
 						<TableRow key={index}>
-							<TableCell>{row.username}</TableCell>
+							<TableCell>{row.displayName}</TableCell>
 							<TableCell>{row.email}</TableCell>
 							<TableCell>{row.role}</TableCell>
 							<TableCell>{row.wallet}</TableCell>
