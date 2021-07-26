@@ -51,10 +51,6 @@ function Body() {
 							Авторский алгоритм вложения средств на основе ИИ позволяет
 							избежать рисков валютной инфляции и приумножать капитал
 						</p>
-						{/* <a href='#' className='link-green'>
-							О алгоритме
-							<i className='fas fa-angle-right' />
-						</a> */}
 					</div>
 				</div>
 				<div className='features-item'>

@@ -29,6 +29,10 @@ a {
 	width: 600px !important;
 }
 
+.mobile-btn {
+	display: none;
+}
+
 /* [type=button]{
     -webkit-appearance: none !important;
   } */

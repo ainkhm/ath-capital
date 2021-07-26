@@ -31,14 +31,14 @@ function VerificationPage() {
 				<div className={classes.root}>
 					<Paper className={classes.panel}>
 						<Typography variant='h6' component='p' >
-							Please verify your email to continue.
+							Пожалуйста подтвердите ваш E-mail.
 						</Typography>
 						<Button
 							component={Link}
 							onClick={verifyEmail}
 							data-test='sign-in'
 						>
-							Send Verification Email
+							Отправить письмо верификации
 						</Button>
 					</Paper>
 				</div>

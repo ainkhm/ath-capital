@@ -135,6 +135,9 @@ ul li {
 .main_menu-right .menu-item:last-child:hover {
 	border-top: 4px solid transparent;
 }
+.mobile-btn {
+	display: none;
+}
 
 .btn-primary {
 	padding: 12px 24px;
@@ -946,6 +949,9 @@ div.links_white {
 }
 
 @media (max-width: 768px) {
+	.mobile-btn {
+		display: flex !important;
+	}
 	.main {
 		padding: 40px 0;
 	}

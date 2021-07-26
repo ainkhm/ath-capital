@@ -29,24 +29,21 @@ function Navbar() {
 				<ul className='main_menu-right'>
 					{/* <li className="menu-item"><a href="#">Связаться с нами</a></li> */}
 					<li className='menu-item'>
-						<a href='#' onClick={() => history.push('/login')}>
-							Вход
-						</a>
+						<a onClick={() => history.push('/login')}>Вход</a>
 					</li>
 					<li className='menu-item'>
-						<a
-							href='#'
-							className='btn-primary'
-							onClick={() => history.push('/signup')}
-						>
+						<a className='btn-primary' onClick={() => history.push('/signup')}>
 							Регистрация
 						</a>
 					</li>
 				</ul>
 			</div>
-			{/* <a href='#' id='nav-btn'>
-				<span className='nav-btn' />
-			</a> */}
+			<a
+				onClick={() => history.push('/login')}
+				className='mobile-btn btn-primary'
+			>
+				Вход
+			</a>
 		</nav>
 	);
 }
