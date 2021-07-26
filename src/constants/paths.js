@@ -6,4 +6,5 @@ export const ACCOUNT_PATH = '/account'
 export const LOGIN_PATH = '/login'
 export const SIGNUP_PATH = '/signup'
 export const VERIFICATION_PATH = '/verification'
-export const HOME_PATH = '/'
+export const POLICY_PATH = '/policy';
+export const HOME_PATH = '/';
