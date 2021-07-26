@@ -5,9 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { validateEmail } from 'utils/form';
-import styles from './LoginForm.styles';
+import styles from './RecoverPasswordForm.styles';
 import { Link } from 'react-router-dom';
-import { RECOVER_PATH } from 'constants/paths';
+import { LOGIN_PATH, RECOVER_PATH } from 'constants/paths';
 
 const useStyles = makeStyles(styles);
 
@@ -40,21 +40,6 @@ function LoginForm({ onSubmit }) {
 					error={!!errors.email}
 					helperText={errors.email && 'Введите правильный пароль'}
 				/>
-				<TextField
-					type='password'
-					name='password'
-					placeholder='password'
-					autoComplete='current-password'
-					margin='normal'
-					fullWidth
-					inputProps={{
-						...register('password', {
-							required: true,
-						}),
-					}}
-					error={!!errors.password}
-					helperText={errors.password && 'Password is required'}
-				/>
 				<div className={classes.submit}>
 					<Button
 						color='primary'
@@ -62,13 +47,13 @@ function LoginForm({ onSubmit }) {
 						variant='contained'
 						disabled={isSubmitting || !isValid}
 					>
-						{isSubmitting ? 'Вход..' : 'Войти'}
+						{isSubmitting ? 'Вход..' : 'Send email'}
 					</Button>
 				</div>
 			</form>
 			<div className={classes.signup}>
-				<Link className={classes.signupLink} to={RECOVER_PATH}>
-					Forgot password?
+				<Link className={classes.signupLink} to={LOGIN_PATH}>
+					Login
 				</Link>
 			</div>
 		</>
