@@ -18,7 +18,7 @@ function Navbar() {
 						<a href='https://ath-capital.web.app/#transactions'>О нас</a>
 					</li>
 					<li>
-						<a href='https://ath-capital.web.app/#algoritm'>Алгортм</a>
+						<a href='https://ath-capital.web.app/#algoritm'>Алгоритм</a>
 					</li>
 					<li>
 						<Link to='/policy'> Публичная оферта</Link>

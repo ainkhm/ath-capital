@@ -35,7 +35,7 @@ function LoginForm({ onSubmit }) {
 					}),
 				}}
 				error={!!errors.email}
-				helperText={errors.email && 'Email must be valid'}
+				helperText={errors.email && 'Введите правильный пароль'}
 			/>
 			<TextField
 				type='password'

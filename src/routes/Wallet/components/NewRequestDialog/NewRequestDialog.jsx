@@ -105,14 +105,13 @@ function NewRequestDialog({
 			) : (
 				<>
 					<CopyToClipboard
-						text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'}
+						text={'ERC-20 - 0x3b42bef0e4e0094ab0a5aa3a0eb45e3afcbe3cb8'}
 					/>
+
 					<CopyToClipboard
-						text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'}
+						text={'TRC20 - TWo8SuJXfVvsp25ZM5JNezQF2ahWxzwJLr'}
 					/>
-					<CopyToClipboard
-						text={'0x0a245F5631213090e1B2d51C2e4eE970aE163fBE'}
-					/>
+
 					<DialogActions>
 						<Button
 							type='button'

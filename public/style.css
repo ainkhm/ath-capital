@@ -946,6 +946,9 @@ div.links_white {
 }
 
 @media (max-width: 768px) {
+	.main {
+		padding: 40px 0;
+	}
 	.main,
 	.channels,
 	.payments,

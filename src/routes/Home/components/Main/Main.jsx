@@ -6,7 +6,7 @@ function Main() {
 		<section className='main'>
 			<div className='main-header'>
 				<h1 className='heading'>
-					ATH capital. <br />
+					ATH capital <br />
 					Доход сегодня
 				</h1>
 				<p>Ваши деньги должны работать и мы вам в этом поможем</p>
