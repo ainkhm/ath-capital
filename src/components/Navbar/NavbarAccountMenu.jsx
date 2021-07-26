@@ -8,6 +8,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import { LIST_PATH } from 'constants/paths';
 import styles from './Navbar.styles';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(styles);
 
@@ -15,6 +16,8 @@ function AccountMenu() {
 	const classes = useStyles();
 	const [anchorEl, setMenu] = useState(null);
 	const firebase = useFirebase();
+	const profile = useSelector(({ firebase }) => firebase.profile);
+
 
 	function closeAccountMenu() {
 		setMenu(null);
@@ -45,8 +48,8 @@ function AccountMenu() {
 				open={Boolean(anchorEl)}
 				onClose={closeAccountMenu}
 			>
-				<MenuItem component={Link} to={LIST_PATH} onClick={closeAccountMenu}>
-					Статистика
+				<MenuItem component='p'>
+					{profile.email}
 				</MenuItem>
 				<MenuItem onClick={handleLogout}>Sign Out</MenuItem>
 			</Menu>

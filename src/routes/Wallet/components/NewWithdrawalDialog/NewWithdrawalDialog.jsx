@@ -24,10 +24,6 @@ function NewWithdrawalDialog({
 		formState: { isSubmitting, isValid, errors },
 	} = useForm({ mode: 'onChange' });
 
-	useEffect(() => {
-		console.log(errors.amount)
-	}, [errors.amount])
-
 	return (
 		<Dialog open={open} onClose={onRequestClose}>
 			<DialogTitle id='new-project-dialog-title'>

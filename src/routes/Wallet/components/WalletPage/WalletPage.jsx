@@ -208,12 +208,12 @@ function ProjectsList() {
 										</Typography>
 									</Grid>
 									<Grid item xs={12} md={6}>
-
 										<Button
 											variant='contained'
 											color='primary'
 											onClick={toggleDialog}
 											style={{ marginRight: 15 }}
+											className="btn-responsive"
 										>
 											Внести депозит
 										</Button>
@@ -221,6 +221,7 @@ function ProjectsList() {
 											variant='contained'
 											color='primary'
 											onClick={toggleWithdrawalDialog}
+											className="btn-responsive"
 										>
 											Снять Средства
 										</Button>

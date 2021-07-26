@@ -36,7 +36,6 @@ function SignupPage() {
 	}
 
 	const updateReferrer = async (user) => {
-		console.log('user -->', user)
 		const userToSave = { createdAt: user.createdAt, email: user.email };
 		if (user?.referrer !== null) {
 			await user?.referrer?.update({
