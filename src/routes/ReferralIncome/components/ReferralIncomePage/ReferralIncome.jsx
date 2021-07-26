@@ -16,7 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import RequestsList from '../ReferralsList';
 import CopyToClipboard from 'components/CopyToClipboard';
-import { SIGNUP_PATH, USERS_PATH } from 'constants/paths';
+import { SIGNUP_PATH, USERS_PATH, VERIFICATION_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
 import { COMMISSIONS_COLLECTION } from 'constants/firebasePaths';
 const useStyles = makeStyles(styles);
@@ -26,6 +26,7 @@ function ReferralIncome() {
 	const classes = useStyles();
 	// Get auth from redux state
 	const auth = useSelector(({ firebase: { auth } }) => auth);
+	const isVerified = useSelector(({ firebase }) => firebase.auth.emailVerified)
 
 	useFirestoreConnect([
 		{
@@ -95,41 +96,43 @@ function ReferralIncome() {
 
 	return profile.role === 'admin' ? (
 		<Redirect to={USERS_PATH} />
-	) : (
-		<div className={classes.root}>
-			<Grid container spacing={3} className={classes.container}>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<div className={classes.spaceBetween}>
-								<div>
-									<Typography color='textSecondary'>
-										Реферальный доход
-									</Typography>
-									<Typography component='h4' variant='h4'>
-										<Typography component='span' variant='subtitle1'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
-									</Typography>
+	) : isVerified
+		? (
+			<div className={classes.root}>
+				<Grid container spacing={3} className={classes.container}>
+					<Grid item xs={12}>
+						<Card className={classes.card} variant='outlined'>
+							<CardContent>
+								<div className={classes.spaceBetween}>
+									<div>
+										<Typography color='textSecondary'>
+											Реферальный доход
+										</Typography>
+										<Typography component='h4' variant='h4'>
+											<Typography component='span' variant='subtitle1'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
+										</Typography>
+									</div>
+									<div>
+										<CopyToClipboard
+											text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
+										/>
+									</div>
 								</div>
-								<div>
-									<CopyToClipboard
-										text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
-									/>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12}>
+						<Card className={classes.card} variant='outlined'>
+							<CardContent>
+								<Typography color='textSecondary'>Ваши реффералы</Typography>
+								<RequestsList userData={userData} />
+							</CardContent>
+						</Card>
+					</Grid>
 				</Grid>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<Typography color='textSecondary'>Ваши реффералы</Typography>
-							<RequestsList userData={userData} />
-						</CardContent>
-					</Card>
-				</Grid>
-			</Grid>
-		</div>
-	);
+			</div>
+		)
+		: <Redirect to={VERIFICATION_PATH} />
 }
 
 export default ReferralIncome;

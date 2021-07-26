@@ -18,7 +18,7 @@ import NewRequestDialog from '../NewRequestDialog';
 import { useNotifications } from 'modules/notification';
 import RequestsList from '../RequestsList';
 import { COMMISSIONS_COLLECTION, REQUESTS_COLLECTION, WITHDRAWALS_COLLECTION } from 'constants/firebasePaths';
-import { USERS_PATH } from 'constants/paths';
+import { USERS_PATH, VERIFICATION_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
 import NewWithdrawalDialog from '../NewWithdrawalDialog';
 import WithdrawsList from '../WithdrawsList';
@@ -156,6 +156,7 @@ function ProjectsList() {
 	const classes = useStyles();
 	// Get auth from redux state
 	const profile = useSelector(({ firebase: { profile } }) => profile);
+	const isVerified = useSelector(({ firebase }) => firebase.auth.emailVerified)
 
 	const {
 		requests,
@@ -179,85 +180,87 @@ function ProjectsList() {
 
 	return profile.role === 'admin' ? (
 		<Redirect to={USERS_PATH} />
-	) : (
-		<div className={classes.root}>
-			<NewRequestDialog
-				onSubmit={addRequests}
-				open={newDialogOpen}
-				onRequestClose={toggleDialog}
-				stepOne={stepOne}
-				setStepOne={setStepOne}
-			/>
-			<NewWithdrawalDialog
-				onSubmit={addWithdrawRequests}
-				open={withdrawalOpen}
-				onRequestClose={toggleWithdrawalDialog}
-				validationAmount={compoundPrice}
-			/>
-			<Grid container spacing={3} className={classes.container}>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<div className={classes.spaceBetween}>
-								<div>
-									<Typography color='textSecondary'>Кошелек</Typography>
-									<Typography component='h4' variant='h4'>
-										<Typography component='span' variant='subtitle1'>USDT {profile.wallet} + USDT {profile.wallet * percentIncrease / 100} = </Typography> USDT {compoundPrice}
-									</Typography>
+	) : isVerified
+		? (
+			<div className={classes.root}>
+				<NewRequestDialog
+					onSubmit={addRequests}
+					open={newDialogOpen}
+					onRequestClose={toggleDialog}
+					stepOne={stepOne}
+					setStepOne={setStepOne}
+				/>
+				<NewWithdrawalDialog
+					onSubmit={addWithdrawRequests}
+					open={withdrawalOpen}
+					onRequestClose={toggleWithdrawalDialog}
+					validationAmount={compoundPrice}
+				/>
+				<Grid container spacing={3} className={classes.container}>
+					<Grid item xs={12}>
+						<Card className={classes.card} variant='outlined'>
+							<CardContent>
+								<div className={classes.spaceBetween}>
+									<div>
+										<Typography color='textSecondary'>Кошелек</Typography>
+										<Typography component='h4' variant='h4'>
+											<Typography component='span' variant='subtitle1'>USDT {profile.wallet} + USDT {profile.wallet * percentIncrease / 100} = </Typography> USDT {compoundPrice}
+										</Typography>
+									</div>
+									<div>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={toggleDialog}
+											style={{ marginRight: 15 }}
+										>
+											Внести депозит
+										</Button>
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={toggleWithdrawalDialog}
+										>
+											Снять Средства
+										</Button>
+									</div>
 								</div>
-								<div>
-									<Button
-										variant='contained'
-										color='primary'
-										onClick={toggleDialog}
-										style={{ marginRight: 15 }}
-									>
-										Внести депозит
-									</Button>
-									<Button
-										variant='contained'
-										color='primary'
-										onClick={toggleWithdrawalDialog}
-									>
-										Снять Средства
-									</Button>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				</Grid>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							{(requests || []).length > 0
-								? <>
-									<Typography color='textSecondary'>Ваши заявки</Typography>
-									<RequestsList requests={requests} />
-								</>
-								: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12}>
+						<Card className={classes.card} variant='outlined'>
+							<CardContent>
+								{(requests || []).length > 0
+									? <>
+										<Typography color='textSecondary'>Ваши заявки</Typography>
+										<RequestsList requests={requests} />
+									</>
+									: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
 
-							}
+								}
 
-						</CardContent>
-					</Card>
-				</Grid>
-				<Grid item xs={12}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							{(withdrawalRequests || []).length > 0
-								? <>
-									<Typography color='textSecondary'>Ваши заявки</Typography>
+							</CardContent>
+						</Card>
+					</Grid>
+					<Grid item xs={12}>
+						<Card className={classes.card} variant='outlined'>
+							<CardContent>
+								{(withdrawalRequests || []).length > 0
+									? <>
+										<Typography color='textSecondary'>Ваши заявки</Typography>
 
-									<WithdrawsList requests={withdrawalRequests} />
-								</>
-								: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
-							}
-						</CardContent>
-					</Card>
+										<WithdrawsList requests={withdrawalRequests} />
+									</>
+									: <Typography variant='h5' style={{ textAlign: 'center' }}>Нет заявок</Typography>
+								}
+							</CardContent>
+						</Card>
+					</Grid>
 				</Grid>
-			</Grid>
-		</div>
-	);
+			</div>
+		)
+		: <Redirect to={VERIFICATION_PATH} />
 }
 
 export default ProjectsList;

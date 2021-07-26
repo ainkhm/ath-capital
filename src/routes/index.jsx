@@ -4,6 +4,7 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import LoginRoute from './Login'
 import SignupRoute from './Signup'
+import VerificationRoute from './Verification'
 import ProjectsRoute from './Projects'
 import AccountRoute from './Account'
 import NotFoundRoute from './NotFound'
@@ -23,6 +24,7 @@ export default function createRoutes() {
             AccountRoute,
             ProjectsRoute,
             SignupRoute,
+            VerificationRoute,
             LoginRoute,
             WalletRoute,
             ReferralIncomeRoute,
