@@ -37,7 +37,7 @@ export default (theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 12,
   },
   hide: {
     display: 'none',
@@ -75,6 +75,13 @@ export default (theme) => ({
     '&~.MuiList-padding .MuiListItem-gutters': {
       paddingLeft: 23
     }
+  },
+  '@media screen and (max-width: 600px)': {
+    toolbar: {
+      '&~.MuiList-padding .MuiListItem-gutters': {
+        paddingLeft: 16
+      }
+    },
   },
   content: {
     flexGrow: 1,

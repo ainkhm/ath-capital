@@ -42,17 +42,18 @@ const DrawerContainer = (props) => {
 
 	return (
 		<Drawer
-			variant='permanent'
-			className={clsx(classes.drawer, {
-				[classes.drawerOpen]: props.open,
-				[classes.drawerClose]: !props.open,
-			})}
-			classes={{
-				paper: clsx({
-					[classes.drawerOpen]: props.open,
-					[classes.drawerClose]: !props.open,
-				}),
-			}}
+			// variant='permanent'
+			// className={clsx(classes.drawer, {
+			// 	[classes.drawerOpen]: props.open,
+			// 	[classes.drawerClose]: !props.open,
+			// })}
+			// classes={{
+			// 	paper: clsx({
+			// 		[classes.drawerOpen]: props.open,
+			// 		[classes.drawerClose]: !props.open,
+			// 	}),
+			// }}
+			anchor={'left'} open={props.open} onClose={props.handleDrawerClose}
 		>
 			<div className={classes.toolbar}>
 				<IconButton onClick={props.handleDrawerClose}>
