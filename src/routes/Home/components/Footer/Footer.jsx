@@ -94,7 +94,7 @@ function Navbar() {
 						Я подтверждаю, что прочитал Политику конфиденциальности ATH Capital
 						и согласен на использование моих данных в соответствии с ней.
 					</span> */}
-					<div className='social_media'>
+					{/* <div className='social_media'>
 						<a href='#'>
 							<svg
 								width={16}
@@ -155,7 +155,7 @@ function Navbar() {
 								/>
 							</svg>
 						</a>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className='footer-info'>

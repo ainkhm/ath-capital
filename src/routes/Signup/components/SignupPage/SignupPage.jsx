@@ -66,14 +66,13 @@ function SignupPage() {
 					}
 				});
 		}
-	}
+	};
 
 	function googleLogin() {
 		return firebase
 			.login({ provider: 'google', type: 'popup' })
-			.then(async user => {
+			.then(async (user) => {
 				if (user.additionalUserInfo.isNewUser) {
-
 					await firestore
 						.collection('users')
 						.doc(user.user.uid)
@@ -85,7 +84,7 @@ function SignupPage() {
 							level3: [],
 							referrer: referrer ? referrer : null,
 							createdAt: firestore.Timestamp.now(),
-						})
+						});
 
 					firestore
 						.collection('users')
@@ -93,8 +92,8 @@ function SignupPage() {
 						.get()
 						.then(async (doc) => {
 							const user = doc.data();
-							updateReferrer(user)
-						})
+							updateReferrer(user);
+						});
 				}
 			})
 			.catch((err) => showError(err.message));
@@ -124,9 +123,9 @@ function SignupPage() {
 			<Paper className={classes.panel}>
 				<SignupForm onSubmit={emailSignup} onSubmitFail={onSubmitFail} />
 			</Paper>
-			<div className={classes.orLabel}>or</div>
+			<div className={classes.orLabel}>или</div>
 			<div className={classes.providers}>
-				<GoogleButton onClick={googleLogin} data-test="google-auth-button" />
+				<GoogleButton onClick={googleLogin} data-test='google-auth-button' />
 			</div>
 			<div className={classes.login}>
 				<span className={classes.loginLabel}>У вас уже есть аккаунт?</span>

@@ -20,7 +20,7 @@ function VerificationPage() {
 
 	const verifyEmail = () => {
 		firebase.auth().currentUser.sendEmailVerification()
-		showSuccess('A verification link has been sent to your email.')
+		showSuccess('Письмо верификации было отправлено на ваш E-mail')
 	}
 
 	return (profile.role === "admin"

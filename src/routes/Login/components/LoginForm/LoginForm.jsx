@@ -24,7 +24,7 @@ function LoginForm({ onSubmit }) {
 		<form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
 				type='email'
-				placeholder='email'
+				placeholder='E-mail'
 				autoComplete='email'
 				margin='normal'
 				fullWidth
@@ -40,7 +40,7 @@ function LoginForm({ onSubmit }) {
 			<TextField
 				type='password'
 				name='password'
-				placeholder='password'
+				placeholder='пароль'
 				autoComplete='current-password'
 				margin='normal'
 				fullWidth
@@ -50,7 +50,7 @@ function LoginForm({ onSubmit }) {
 					}),
 				}}
 				error={!!errors.password}
-				helperText={errors.password && 'Password is required'}
+				helperText={errors.password && 'Введите пароль'}
 			/>
 			<div className={classes.submit}>
 				<Button

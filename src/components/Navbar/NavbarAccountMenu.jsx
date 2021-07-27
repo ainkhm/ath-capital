@@ -18,7 +18,6 @@ function AccountMenu() {
 	const firebase = useFirebase();
 	const profile = useSelector(({ firebase }) => firebase.profile);
 
-
 	function closeAccountMenu() {
 		setMenu(null);
 	}
@@ -48,10 +47,8 @@ function AccountMenu() {
 				open={Boolean(anchorEl)}
 				onClose={closeAccountMenu}
 			>
-				<MenuItem component='p'>
-					{profile.email}
-				</MenuItem>
-				<MenuItem onClick={handleLogout}>Sign Out</MenuItem>
+				<MenuItem component='p'>{profile.email}</MenuItem>
+				<MenuItem onClick={handleLogout}>Выйти</MenuItem>
 			</Menu>
 		</>
 	);

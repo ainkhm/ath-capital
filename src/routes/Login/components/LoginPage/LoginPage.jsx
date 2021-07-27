@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 function LoginPage() {
 	const classes = useStyles();
 	const firebase = useFirebase();
-	const firestore = useFirestore()
+	const firestore = useFirestore();
 	const { showError } = useNotifications();
 
 	function onSubmitFail(formErrs, dispatch, err) {
@@ -25,21 +25,17 @@ function LoginPage() {
 	function googleLogin() {
 		return firebase
 			.login({ provider: 'google', type: 'popup' })
-			.then(async user => {
+			.then(async (user) => {
 				if (user.additionalUserInfo.isNewUser) {
-
-					await firestore
-						.collection('users')
-						.doc(user.user.uid)
-						.update({
-							role: CUSTOMER,
-							wallet: 0,
-							level1: [],
-							level2: [],
-							level3: [],
-							referrer: null,
-							createdAt: firestore.Timestamp.now(),
-						})
+					await firestore.collection('users').doc(user.user.uid).update({
+						role: CUSTOMER,
+						wallet: 0,
+						level1: [],
+						level2: [],
+						level3: [],
+						referrer: null,
+						createdAt: firestore.Timestamp.now(),
+					});
 				}
 			})
 			.catch((err) => showError(err.message));
@@ -54,9 +50,9 @@ function LoginPage() {
 			<Paper className={classes.panel}>
 				<LoginForm onSubmit={emailLogin} onSubmitFail={onSubmitFail} />
 			</Paper>
-			<div className={classes.orLabel}>or</div>
+			<div className={classes.orLabel}>или</div>
 			<div className={classes.providers}>
-				<GoogleButton onClick={googleLogin} data-test="google-auth-button" />
+				<GoogleButton onClick={googleLogin} data-test='google-auth-button' />
 			</div>
 			<div className={classes.signup}>
 				<span className={classes.signupLabel}>У вас нет еще нет аккаунта?</span>

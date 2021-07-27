@@ -11,7 +11,7 @@ function Main() {
 				</h1>
 				<p>Ваши деньги должны работать и мы вам в этом поможем</p>
 
-				<a href='#' className='btn-primary'>
+				<a href='https://t.me/ath_sup' target='_blank' className='btn-primary'>
 					Записаться на консультацию
 				</a>
 			</div>

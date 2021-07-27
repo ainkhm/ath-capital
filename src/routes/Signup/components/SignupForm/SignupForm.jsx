@@ -97,7 +97,7 @@ function SignupForm({ onSubmit }) {
 					variant='contained'
 					disabled={isSubmitting || !isValid}
 				>
-					{isSubmitting ? 'Loading' : 'Signup'}
+					{isSubmitting ? 'Загрухка' : 'Регистрация'}
 				</Button>
 			</div>
 		</form>
