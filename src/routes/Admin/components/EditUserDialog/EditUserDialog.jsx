@@ -103,7 +103,7 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={onRequestClose} tabIndex='3'>
-						Cancel
+						Отменить
 					</Button>
 					<Button
 						type='submit'

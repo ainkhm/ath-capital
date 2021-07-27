@@ -47,13 +47,13 @@ function LoginForm({ onSubmit }) {
 						variant='contained'
 						disabled={isSubmitting || !isValid}
 					>
-						{isSubmitting ? 'Вход..' : 'Send email'}
+						{isSubmitting ? 'Загрузка..' : 'Отправить'}
 					</Button>
 				</div>
 			</form>
 			<div className={classes.signup}>
 				<Link className={classes.signupLink} to={LOGIN_PATH}>
-					Login
+					Авторизоваться
 				</Link>
 			</div>
 		</>

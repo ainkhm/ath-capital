@@ -156,7 +156,7 @@ function useUsersList() {
 		updateCommissions,
 		approveRequest,
 		rejectRequest,
-		deleteRequest
+		deleteRequest,
 	};
 }
 
@@ -178,7 +178,7 @@ function AdminPage() {
 		updateCommissions,
 		approveRequest,
 		rejectRequest,
-		deleteRequest
+		deleteRequest,
 	} = useUsersList();
 
 	const [path, setPath] = useState('');
@@ -211,61 +211,69 @@ function AdminPage() {
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							{
-								users.length > 0
-									? <>
-										<Typography color='textSecondary'>Users</Typography>
-										<UsersList
-											users={users}
-											updateUser={updateUser}
-											newDialogOpen={newDialogOpen}
-											toggleDialog={toggleDialog}
-										/>
-									</>
-									: <Typography variant='h5' style={{ textAlign: 'center' }}>No Users</Typography>
-
-							}
+							{users.length > 0 ? (
+								<>
+									<Typography color='textSecondary'>Users</Typography>
+									<UsersList
+										users={users}
+										updateUser={updateUser}
+										newDialogOpen={newDialogOpen}
+										toggleDialog={toggleDialog}
+									/>
+								</>
+							) : (
+								<Typography variant='h5' style={{ textAlign: 'center' }}>
+									No Users
+								</Typography>
+							)}
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							{
-								(requests || []).length > 0
-									? <>
-										<Typography color='textSecondary'>User Requests</Typography>
-										<RequestsList
-											requests={requests}
-											approveRequest={approveRequest}
-											rejectRequest={rejectRequest}
-											deleteRequest={deleteRequest}
-										/>
-									</>
-									: <Typography Typography variant='h5' style={{ textAlign: 'center' }}>No  Requests</Typography>
-
-							}
+							{(requests || []).length > 0 ? (
+								<>
+									<Typography color='textSecondary'>User Requests</Typography>
+									<RequestsList
+										requests={requests}
+										approveRequest={approveRequest}
+										rejectRequest={rejectRequest}
+										deleteRequest={deleteRequest}
+									/>
+								</>
+							) : (
+								<Typography
+									Typography
+									variant='h5'
+									style={{ textAlign: 'center' }}
+								>
+									No Requests
+								</Typography>
+							)}
 						</CardContent>
 					</Card>
 				</Grid>
 				<Grid item xs={12}>
 					<Card className={classes.card} variant='outlined'>
 						<CardContent>
-							{
-								(withdrawalRequests || []).length > 0
-									? <>
-										<Typography color='textSecondary'>Withdrawal Requests</Typography>
-										<WithdrawsList
-											requests={withdrawalRequests}
-											approveRequest={approveRequest}
-											rejectRequest={rejectRequest}
-											deleteRequest={deleteRequest}
-										/>
-									</>
-									: <Typography variant='h5' style={{ textAlign: 'center' }}>No Withdrawal Requests</Typography>
-
-							}
-
+							{(withdrawalRequests || []).length > 0 ? (
+								<>
+									<Typography color='textSecondary'>
+										Запросы на выплату
+									</Typography>
+									<WithdrawsList
+										requests={withdrawalRequests}
+										approveRequest={approveRequest}
+										rejectRequest={rejectRequest}
+										deleteRequest={deleteRequest}
+									/>
+								</>
+							) : (
+								<Typography variant='h5' style={{ textAlign: 'center' }}>
+									Нет запросов на выплату
+								</Typography>
+							)}
 						</CardContent>
 					</Card>
 				</Grid>

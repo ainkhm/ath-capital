@@ -68,7 +68,7 @@ function LoginForm({ onSubmit }) {
 			</form>
 			<div className={classes.signup}>
 				<Link className={classes.signupLink} to={RECOVER_PATH}>
-					Forgot password?
+					Забыли пароль?
 				</Link>
 			</div>
 		</>
