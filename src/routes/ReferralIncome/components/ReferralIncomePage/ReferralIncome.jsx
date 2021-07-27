@@ -40,9 +40,9 @@ function ReferralIncome() {
 		({ firestore: { ordered } }) => ordered.commissions
 	);
 
-	const incByLevel1 = profile?.level1?.length * (commissions || [])[0]?.level1
-	const incByLevel2 = profile?.level2?.length * (commissions || [])[0]?.level2
-	const incByLevel3 = profile?.level3?.length * (commissions || [])[0]?.level3
+	const incByLevel1 = (profile?.level1?.length || 0) * (commissions || [])[0]?.level1
+	const incByLevel2 = (profile?.level2?.length || 0) * (commissions || [])[0]?.level2
+	const incByLevel3 = (profile?.level3?.length || 0) * (commissions || [])[0]?.level3
 
 	const percentIncrease = incByLevel1 + incByLevel2 + incByLevel3
 

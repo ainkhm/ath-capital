@@ -5,6 +5,7 @@ export const USERS_PATH = '/admin'
 export const ACCOUNT_PATH = '/account'
 export const LOGIN_PATH = '/login'
 export const SIGNUP_PATH = '/signup'
+export const RECOVER_PATH = '/recover-password'
 export const VERIFICATION_PATH = '/verification'
 export const POLICY_PATH = '/policy';
 export const HOME_PATH = '/';

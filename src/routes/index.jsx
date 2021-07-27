@@ -5,6 +5,7 @@ import Home from './Home';
 import Policy from './PolicyPage';
 import LoginRoute from './Login';
 import SignupRoute from './Signup';
+import RecoverPasswordRoute from './RecoverPassword';
 import VerificationRoute from './Verification'
 import ProjectsRoute from './Projects';
 import AccountRoute from './Account';
@@ -31,6 +32,7 @@ export default function createRoutes() {
             ProjectsRoute,
             SignupRoute,
             VerificationRoute,
+            RecoverPasswordRoute,
             LoginRoute,
             WalletRoute,
             ReferralIncomeRoute,
