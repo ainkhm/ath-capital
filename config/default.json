@@ -1,13 +1,13 @@
 {
   "firebase": {
-    "projectId": "",
-    "appId": "",
-    "databaseURL": "",
-    "storageBucket": "",
-    "locationId": "",
-    "apiKey": "",
-    "authDomain": "",
-    "messagingSenderId": "",
-    "measurementId": ""
+    "projectId": "ath-capital",
+    "appId": "1:993720228104:web:b1847e54113f31e5cdf4bd",
+    "databaseURL": "https://ath-capital-default-rtdb.firebaseio.com",
+    "storageBucket": "ath-capital.appspot.com",
+    "locationId": "us-central",
+    "apiKey": "AIzaSyAEJbm5Re_JUy4gfTgFPjh7s_x01lGUagc",
+    "authDomain": "ath-capital.firebaseapp.com",
+    "messagingSenderId": "993720228104",
+    "measurementId": "G-81J356EK5R"
   }
 }
