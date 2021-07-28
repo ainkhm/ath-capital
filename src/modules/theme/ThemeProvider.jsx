@@ -2,7 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
 import ThemeSettings from '../../theme'
 import ThemeContext from './ThemeContext'
 
@@ -16,7 +17,7 @@ export default function ThemeProvider({ children }) {
 
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         ...ThemeSettings,
         palette: {
           ...ThemeSettings.palette,
@@ -37,10 +38,10 @@ export default function ThemeProvider({ children }) {
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         {children}
         <CssBaseline />
-      </MuiThemeProvider>
+      </ThemeProvider>
     </ThemeContext.Provider>
   )
 }

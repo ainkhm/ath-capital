@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import { useFirebase } from 'react-redux-firebase';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import styles from './VerificationPage.styles';
 import { Button, Typography } from '@material-ui/core';
 import { LIST_PATH, USERS_PATH } from 'constants/paths';
@@ -24,9 +24,11 @@ function VerificationPage() {
 	}
 
 	return (profile.role === "admin"
-		? <Redirect to={USERS_PATH} />
+		// ? <Redirect to={USERS_PATH} />
+		? <p>abc</p>
 		: isVerified
-			? <Redirect to={LIST_PATH} />
+			// ? <Redirect to={LIST_PATH} />
+			? <p>abc</p>
 			: (
 				<div className={classes.root}>
 					<Paper className={classes.panel}>

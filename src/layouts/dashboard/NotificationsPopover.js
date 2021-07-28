@@ -189,85 +189,83 @@ export default function NotificationsPopover() {
     );
   };
 
-  return (
-    <>
-      <IconButton
-        ref={anchorRef}
-        size="large"
-        color={open ? 'primary' : 'default'}
-        onClick={handleOpen}
-        sx={{
-          ...(open && {
-            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
-          })
-        }}
-      >
-        <Badge badgeContent={totalUnRead} color="error">
-          <Icon icon={bellFill} width={20} height={20} />
-        </Badge>
-      </IconButton>
+  return <>
+    <IconButton
+      ref={anchorRef}
+      size="large"
+      color={open ? 'primary' : 'default'}
+      onClick={handleOpen}
+      sx={{
+        ...(open && {
+          bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
+        })
+      }}
+    >
+      <Badge badgeContent={totalUnRead} color="error">
+        <Icon icon={bellFill} width={20} height={20} />
+      </Badge>
+    </IconButton>
 
-      <MenuPopover
-        open={open}
-        onClose={handleClose}
-        anchorEl={anchorRef.current}
-        sx={{ width: 360 }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              You have {totalUnRead} unread messages
-            </Typography>
-          </Box>
-
-          {totalUnRead > 0 && (
-            <Tooltip title=" Mark all as read">
-              <IconButton color="primary" onClick={handleMarkAllAsRead}>
-                <Icon icon={doneAllFill} width={20} height={20} />
-              </IconButton>
-            </Tooltip>
-          )}
+    <MenuPopover
+      open={open}
+      onClose={handleClose}
+      anchorEl={anchorRef.current}
+      sx={{ width: 360 }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="subtitle1">Notifications</Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            You have {totalUnRead} unread messages
+          </Typography>
         </Box>
 
-        <Divider />
+        {totalUnRead > 0 && (
+          <Tooltip title=" Mark all as read">
+            <IconButton color="primary" onClick={handleMarkAllAsRead} size="large">
+              <Icon icon={doneAllFill} width={20} height={20} />
+            </IconButton>
+          </Tooltip>
+        )}
+      </Box>
 
-        <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                New
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(0, 2).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
-          </List>
+      <Divider />
 
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Before that
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(2, 5).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
-          </List>
-        </Scrollbar>
+      <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
+        <List
+          disablePadding
+          subheader={
+            <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              New
+            </ListSubheader>
+          }
+        >
+          {notifications.slice(0, 2).map((notification) => (
+            <NotificationItem key={notification.id} notification={notification} />
+          ))}
+        </List>
 
-        <Divider />
+        <List
+          disablePadding
+          subheader={
+            <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              Before that
+            </ListSubheader>
+          }
+        >
+          {notifications.slice(2, 5).map((notification) => (
+            <NotificationItem key={notification.id} notification={notification} />
+          ))}
+        </List>
+      </Scrollbar>
 
-        <Box sx={{ p: 1 }}>
-          <Button fullWidth disableRipple component={RouterLink} to="#">
-            View All
-          </Button>
-        </Box>
-      </MenuPopover>
-    </>
-  );
+      <Divider />
+
+      <Box sx={{ p: 1 }}>
+        <Button fullWidth disableRipple component={RouterLink} to="#">
+          View All
+        </Button>
+      </Box>
+    </MenuPopover>
+  </>;
 }

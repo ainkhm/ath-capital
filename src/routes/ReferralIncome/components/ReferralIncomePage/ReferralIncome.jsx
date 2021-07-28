@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import {
 	useFirestore,
@@ -96,7 +96,8 @@ function ReferralIncome() {
 	}
 
 	return profile.role === 'admin' ? (
-		<Redirect to={USERS_PATH} />
+		// <Redirect to={USERS_PATH} />
+		<p>abc</p>
 	) : isVerified
 		? (
 			<div className={classes.root}>
@@ -137,7 +138,8 @@ function ReferralIncome() {
 				</Grid>
 			</div>
 		)
-		: <Redirect to={VERIFICATION_PATH} />
+		: <p>abc</p>
+	// : <Redirect to={VERIFICATION_PATH} />
 }
 
 export default ReferralIncome;

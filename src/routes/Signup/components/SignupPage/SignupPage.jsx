@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
 import Paper from '@material-ui/core/Paper';
 import { useFirebase, useFirestore } from 'react-redux-firebase';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { LOGIN_PATH } from 'constants/paths';
 import { useNotifications } from 'modules/notification';
 import SignupForm from '../SignupForm';

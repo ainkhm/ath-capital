@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/styles/makeStyles';
 import { useSelector } from 'react-redux'
 import { isLoaded, useFirebase } from 'react-redux-firebase'
 import LoadingSpinner from 'components/LoadingSpinner'
@@ -34,7 +34,7 @@ function AccountEditor() {
   }
 
   return (
-    <Grid container spacing={2} justify="center">
+    <Grid container spacing={2} justifyContent="center">
       <Grid item xs={12} md={6} lg={6} className={classes.gridItem}>
         <img
           className={classes.avatarCurrent}
@@ -46,7 +46,7 @@ function AccountEditor() {
         <AccountForm onSubmit={updateAccount} account={profile} />
       </Grid>
     </Grid>
-  )
+  );
 }
 
 export default AccountEditor

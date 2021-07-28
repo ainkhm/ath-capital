@@ -2,7 +2,7 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/styles/makeStyles';
 import AccountEditor from '../AccountEditor'
 import styles from './AccountPage.styles'
 
@@ -12,7 +12,7 @@ function AccountPage() {
   const classes = useStyles()
 
   return (
-    <Grid container className={classes.root} justify="center">
+    <Grid container className={classes.root} justifyContent="center">
       <Grid item xs={10} md={8} lg={6} className={classes.gridItem}>
         <Paper className={classes.pane}>
           <Typography variant="h4">Account</Typography>
@@ -20,7 +20,7 @@ function AccountPage() {
         </Paper>
       </Grid>
     </Grid>
-  )
+  );
 }
 
 export default AccountPage

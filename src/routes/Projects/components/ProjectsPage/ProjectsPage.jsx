@@ -12,7 +12,8 @@ function ProjectsPage() {
   const isVerified = useSelector(({ firebase }) => firebase.auth.emailVerified)
 
   return profile.role === "admin"
-    ? <Redirect to={USERS_PATH} />
+    // ? <Redirect to={USERS_PATH} />
+    ? <p>abc</p>
     : isVerified
       ? (
         <Switch>
@@ -22,7 +23,8 @@ function ProjectsPage() {
           <Route exact path={match.path} render={() => <ProjectsList />} />
         </Switch>
       )
-      : <Redirect to={VERIFICATION_PATH} />
+      : <p>abc</p>
+  // : <Redirect to={VERIFICATION_PATH} />
 }
 
 export default ProjectsPage

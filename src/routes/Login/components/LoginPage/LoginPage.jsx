@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFirebase, useFirestore } from 'react-redux-firebase';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import GoogleButton from 'react-google-button';
 import { SIGNUP_PATH } from 'constants/paths';
 import { useNotifications } from 'modules/notification';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFirebase } from 'react-redux-firebase';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { useNotifications } from 'modules/notification';
 import RecoverPasswordForm from '../RecoverPasswordForm';
 import styles from './RecoverPasswordPage.styles';

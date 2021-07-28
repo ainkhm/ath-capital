@@ -5,7 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { LIST_PATH } from 'constants/paths';
 import styles from './Navbar.styles';
 import { useSelector } from 'react-redux';
@@ -29,29 +29,27 @@ function AccountMenu() {
 		return firebase.logout();
 	}
 
-	return (
-		<>
-			<IconButton
-				aria-owns={anchorEl ? 'menu-appbar' : null}
-				aria-haspopup='true'
-				onClick={handleMenuClick}
-				classes={{ root: classes.accountButton }}
-			>
-				<AccountCircle />
-			</IconButton>
-			<Menu
-				id='menu-appbar'
-				anchorEl={anchorEl}
-				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-				transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-				open={Boolean(anchorEl)}
-				onClose={closeAccountMenu}
-			>
-				<MenuItem component='p'>{profile.email}</MenuItem>
-				<MenuItem onClick={handleLogout}>Выйти</MenuItem>
-			</Menu>
-		</>
-	);
+	return <>
+        <IconButton
+            aria-owns={anchorEl ? 'menu-appbar' : null}
+            aria-haspopup='true'
+            onClick={handleMenuClick}
+            classes={{ root: classes.accountButton }}
+            size="large">
+            <AccountCircle />
+        </IconButton>
+        <Menu
+            id='menu-appbar'
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={Boolean(anchorEl)}
+            onClose={closeAccountMenu}
+        >
+            <MenuItem component='p'>{profile.email}</MenuItem>
+            <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+        </Menu>
+    </>;
 }
 
 export default AccountMenu;

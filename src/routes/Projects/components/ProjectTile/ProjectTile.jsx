@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/styles/makeStyles';
 import { LIST_PATH } from 'constants/paths'
 import { useNotifications } from 'modules/notification'
 import styles from './ProjectTile.styles'
@@ -42,14 +42,14 @@ function ProjectTile({ name, projectId, showDelete }) {
         </span>
         {showDelete ? (
           <Tooltip title="Delete">
-            <IconButton onClick={deleteProject}>
+            <IconButton onClick={deleteProject} size="large">
               <DeleteIcon />
             </IconButton>
           </Tooltip>
         ) : null}
       </div>
     </Paper>
-  )
+  );
 }
 
 ProjectTile.propTypes = {

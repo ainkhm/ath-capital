@@ -15,20 +15,22 @@ initializeFirebase()
 
 function App({ routes, store }) {
   return (
-    <ThemeProvider>
-      <Provider store={store}>
-        <NotificationsProvider>
-          <ReactReduxFirebaseProvider
-            firebase={firebase}
-            config={defaultRRFConfig}
-            dispatch={store.dispatch}
-            createFirestoreInstance={createFirestoreInstance}>
-            <Router>{routes}</Router>
-          </ReactReduxFirebaseProvider>
-        </NotificationsProvider>
-      </Provider>
-    </ThemeProvider>
-  )
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider>
+        <Provider store={store}>
+          <NotificationsProvider>
+            <ReactReduxFirebaseProvider
+              firebase={firebase}
+              config={defaultRRFConfig}
+              dispatch={store.dispatch}
+              createFirestoreInstance={createFirestoreInstance}>
+              <Router>{routes}</Router>
+            </ReactReduxFirebaseProvider>
+          </NotificationsProvider>
+        </Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 App.propTypes = {

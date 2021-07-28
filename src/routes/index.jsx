@@ -13,11 +13,11 @@ import NotFoundRoute from './NotFound';
 import WalletRoute from './Wallet';
 import ReferralIncomeRoute from './ReferralIncome';
 import AdminRoute from './Admin';
-import { LOGIN_PATH } from 'constants/paths';
+import DashboardLayout from 'layouts/dashboard';
 
 export default function createRoutes() {
   return (
-    <CoreLayout>
+    <DashboardLayout>
       <Switch>
         <Route exact path={Home.path} component={() => <Home.component />} />
         <Route
@@ -43,6 +43,6 @@ export default function createRoutes() {
         }
         <Route component={NotFoundRoute.component} />
       </Switch>
-    </CoreLayout>
+    </DashboardLayout>
   );
 }

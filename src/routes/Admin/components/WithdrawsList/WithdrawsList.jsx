@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -23,7 +23,7 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 	const classes = useStyles();
 
 	return (
-		<TableContainer component={'div'}>
+        <TableContainer component={'div'}>
 			<Table className={classes.table} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
@@ -66,21 +66,30 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 										>
 											Отклонять
 										</Button> */}
-										<IconButton aria-label="delete" onClick={() => {
-											approveRequest(WITHDRAWALS_COLLECTION, row.id);
-										}}>
+										<IconButton
+                                            aria-label="delete"
+                                            onClick={() => {
+                                                approveRequest(WITHDRAWALS_COLLECTION, row.id);
+                                            }}
+                                            size="large">
 											<CheckCircleIcon />
 										</IconButton>
-										<IconButton aria-label="delete" onClick={() => {
-											rejectRequest(WITHDRAWALS_COLLECTION, row.id);
-										}}>
+										<IconButton
+                                            aria-label="delete"
+                                            onClick={() => {
+                                                rejectRequest(WITHDRAWALS_COLLECTION, row.id);
+                                            }}
+                                            size="large">
 											<CancelIcon />
 										</IconButton>
 									</>
 								) : null}
-								<IconButton aria-label="delete" onClick={() => {
-									deleteRequest(WITHDRAWALS_COLLECTION, row.id);
-								}}>
+								<IconButton
+                                    aria-label="delete"
+                                    onClick={() => {
+                                        deleteRequest(WITHDRAWALS_COLLECTION, row.id);
+                                    }}
+                                    size="large">
 									<DeleteIcon />
 								</IconButton>
 							</TableCell>
@@ -89,5 +98,5 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 				</TableBody>
 			</Table>
 		</TableContainer>
-	);
+    );
 }

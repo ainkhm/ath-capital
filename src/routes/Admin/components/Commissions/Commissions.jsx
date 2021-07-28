@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import styles from './Commissions.styles';
 

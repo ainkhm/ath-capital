@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navbar from 'components/Navbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import DrawerContainer from 'components/Navbar/Drawer';
 import { useSelector } from 'react-redux';
 import { isEmpty, isLoaded } from 'react-redux-firebase';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import styles from './ReferralChart.styles';
 import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';

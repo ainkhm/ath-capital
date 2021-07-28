@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import { useSelector } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { LIST_PATH, LOGIN_PATH, USERS_PATH } from 'constants/paths';

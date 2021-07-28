@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 import {
 	useFirestore,
@@ -193,7 +193,8 @@ function AdminPage() {
 	}
 
 	return profile.role !== 'admin' ? (
-		<Redirect to={LIST_PATH} />
+		// <Redirect to={LIST_PATH} />
+		<p>abc</p>
 	) : (
 		<div className={classes.root}>
 			<Grid container spacing={3} className={classes.container}>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/styles/makeStyles';
 import styles from './CopyToClipboard.styles'
 import Typography from '@material-ui/core/Typography'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
@@ -14,11 +14,14 @@ function CopyToClipboard({ text }) {
   return (
     <Typography color="textSecondary" className={classes.text} >
       {text}
-      <IconButton aria-label="copy" onClick={() => navigator.clipboard.writeText(text)}>
+      <IconButton
+        aria-label="copy"
+        onClick={() => navigator.clipboard.writeText(text)}
+        size="large">
         <FileCopyOutlinedIcon />
       </IconButton>
     </Typography>
-  )
+  );
 }
 
 CopyToClipboard.propTypes = {

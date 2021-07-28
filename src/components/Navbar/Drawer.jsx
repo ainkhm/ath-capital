@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -41,7 +41,7 @@ const DrawerContainer = (props) => {
 
 
 	return (
-		<Drawer
+        <Drawer
 			// variant='permanent'
 			// className={clsx(classes.drawer, {
 			// 	[classes.drawerOpen]: props.open,
@@ -56,7 +56,7 @@ const DrawerContainer = (props) => {
 			anchor={'left'} open={props.open} onClose={props.handleDrawerClose}
 		>
 			<div className={classes.toolbar}>
-				<IconButton onClick={props.handleDrawerClose}>
+				<IconButton onClick={props.handleDrawerClose} size="large">
 					<ChevronLeftIcon />
 				</IconButton>
 			</div>
@@ -107,7 +107,7 @@ const DrawerContainer = (props) => {
 				</ListItem>
 			</List>
 		</Drawer>
-	);
+    );
 };
 
 export default DrawerContainer;

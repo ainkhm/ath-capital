@@ -47,14 +47,15 @@ export default function NotificationsProvider({ children }) {
             key={`close-${key}`}
             aria-label="Close"
             color="inherit"
-            onClick={onClickDismiss(key)}>
+            onClick={onClickDismiss(key)}
+            size="large">
             <CloseIcon />
           </IconButton>
         )}>
         {children}
       </SnackbarProvider>
     </NotificationsContext.Provider>
-  )
+  );
 }
 
 NotificationsProvider.propTypes = {

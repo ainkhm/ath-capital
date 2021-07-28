@@ -8,7 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import LightThemeIcon from '@material-ui/icons/BrightnessHigh'
 import DarkThemeIcon from '@material-ui/icons/Brightness4'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/styles/makeStyles';
 import { ThemeContext } from 'modules/theme'
 import styles from './Navbar.styles'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -32,14 +32,14 @@ function NavbarWithoutAuth({ children, brandPath = '/', handleDrawerOpen, open }
         {
           authExists
             ? <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open,
-              })}
-            >
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+            size="large">
               <MenuIcon />
             </IconButton>
             : null
@@ -64,7 +64,7 @@ function NavbarWithoutAuth({ children, brandPath = '/', handleDrawerOpen, open }
         {children}
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 NavbarWithoutAuth.propTypes = {
