@@ -12,6 +12,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import { CUSTOMER, MARKETER } from 'constants/roles';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles(styles);
 
@@ -22,20 +23,25 @@ function SignupForm({ onSubmit }) {
 		handleSubmit,
 		formState: { isSubmitting, isValid, errors },
 		control,
+		setValue
 	} = useForm({
 		mode: 'onChange',
 		nativeValidation: false,
 	});
 
+	useEffect(() => {
+		setValue('role', CUSTOMER);
+	}, []);
+
 	return (
 		<form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
 			<TextField
 				placeholder='Логин'
-				autoComplete='username'
+				autoComplete='displayName'
 				margin='normal'
 				fullWidth
 				inputProps={{
-					...register('username'),
+					...register('displayName'),
 				}}
 			/>
 			<TextField
@@ -72,18 +78,20 @@ function SignupForm({ onSubmit }) {
 				<Controller
 					rules={{ required: true }}
 					control={control}
-					defaultValue={CUSTOMER}
+					// defaultValue={CUSTOMER}
 					name='role'
 					render={({ name, onBlur, onChange, value }) => (
-						<RadioGroup name={name} defaultValue={CUSTOMER}>
+						<RadioGroup name={name} defaultValue={CUSTOMER} onChange={e => setValue('role', e.target.value)}>
 							<FormControlLabel
 								value={CUSTOMER}
 								control={<Radio color='primary' />}
 								label='Инвестор'
+							// checked={value === CUSTOMER}
 							/>
 							<FormControlLabel
 								value={MARKETER}
 								control={<Radio color='primary' />}
+								// checked={value === MARKETER}
 								label='Маркетолог'
 							/>
 						</RadioGroup>

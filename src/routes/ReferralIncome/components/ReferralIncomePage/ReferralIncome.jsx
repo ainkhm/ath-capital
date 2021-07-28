@@ -19,6 +19,7 @@ import CopyToClipboard from 'components/CopyToClipboard';
 import { SIGNUP_PATH, USERS_PATH, VERIFICATION_PATH } from 'constants/paths';
 import { Redirect } from 'react-router-dom';
 import { COMMISSIONS_COLLECTION } from 'constants/firebasePaths';
+import { CUSTOMER } from 'constants/roles';
 const useStyles = makeStyles(styles);
 
 function ReferralIncome() {
@@ -104,7 +105,7 @@ function ReferralIncome() {
 						<Card className={classes.card} variant='outlined'>
 							<CardContent>
 								<Grid container spacing={3} className={classes.spaceBetween}>
-									<Grid item xs={12} md={16}>
+									<Grid item xs={12} md={6}>
 										<Typography color='textSecondary'>
 											Реферальный доход
 										</Typography>
@@ -112,12 +113,15 @@ function ReferralIncome() {
 											<Typography component='span' variant='subtitle1'>USDT {profile.wallet} x {percentIncrease}% = </Typography> USDT {profile.wallet * percentIncrease / 100}
 										</Typography>
 									</Grid>
-									<Grid item xs={12} md={16}>
+									{
+										profile.role === CUSTOMER
+											? <Grid item xs={12} md={6}>
 
-										<CopyToClipboard
-											text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
-										/>
-									</Grid>
+												<CopyToClipboard
+													text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
+												/>
+											</Grid>
+											: null}
 								</Grid>
 							</CardContent>
 						</Card>

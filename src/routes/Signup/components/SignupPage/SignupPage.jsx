@@ -103,7 +103,7 @@ function SignupPage() {
 		return firebase
 			.createUser(creds, {
 				email: creds.email,
-				displayName: creds.username,
+				displayName: creds.displayName,
 				role: creds.role,
 				wallet: 0,
 				level1: [],

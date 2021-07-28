@@ -27,6 +27,7 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 			<Table className={classes.table} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
+						<TableCell>Name</TableCell>
 						<TableCell>Адрес отправителя</TableCell>
 						<TableCell>Адрес получателя</TableCell>
 						<TableCell>Дата и Время</TableCell>
@@ -38,6 +39,7 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 				<TableBody>
 					{requests.map((row, index) => (
 						<TableRow key={index}>
+							<TableCell>{row.userName}</TableCell>
 							<TableCell>{row.sender}</TableCell>
 							<TableCell>{row.receiver}</TableCell>
 							<TableCell>{row.dateTime}</TableCell>

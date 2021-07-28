@@ -99,6 +99,7 @@ function useRequestsList() {
 			.add(REQUESTS_COLLECTION, {
 				...newInstance,
 				createdBy: auth.uid,
+				userName: profile.displayName,
 				createdAt: firestore.FieldValue.serverTimestamp(),
 				status: PENDING_STATUS,
 			})
@@ -121,6 +122,7 @@ function useRequestsList() {
 			.add(WITHDRAWALS_COLLECTION, {
 				...newInstance,
 				createdBy: auth.uid,
+				userName: profile.displayName,
 				createdAt: firestore.FieldValue.serverTimestamp(),
 				status: PENDING_STATUS,
 			})

@@ -28,6 +28,7 @@ import ReferralsGraph from '../ReferralsGraph';
 
 import CopyToClipboard from 'components/CopyToClipboard';
 import { SIGNUP_PATH } from 'constants/paths';
+import { CUSTOMER, MARKETER } from 'constants/roles';
 
 const useStyles = makeStyles(styles);
 
@@ -90,6 +91,7 @@ function ProjectsList() {
 
 	// Get auth from redux state
 	const auth = useSelector(({ firebase: { auth } }) => auth);
+	const profile = useSelector(({ firebase: { profile } }) => profile);
 
 	useEffect(() => {
 		setPath(window.location.origin);
@@ -106,22 +108,28 @@ function ProjectsList() {
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={3} className={classes.container}>
-				<Grid item xs={12} md={6}>
-					<Card className={classes.card} variant='outlined'>
-						<CardContent>
-							<Typography
-								className={classes.title}
-								color='textSecondary'
-								gutterBottom
-							>
-								Рефферальная ссылка
-							</Typography>
-							<CopyToClipboard
-								text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
-							/>
-						</CardContent>
-					</Card>
-				</Grid>
+				{
+					profile.role === CUSTOMER
+						? <Grid item xs={12} md={6}>
+							<Card className={classes.card} variant='outlined'>
+								<CardContent>
+									<Typography
+										className={classes.title}
+										color='textSecondary'
+										gutterBottom
+									>
+										Рефферальная ссылка
+									</Typography>
+									<CopyToClipboard
+										text={`${path}${SIGNUP_PATH}?referral=${auth.uid}`}
+									/>
+
+
+								</CardContent>
+							</Card>
+						</Grid>
+						: null
+				}
 				{projects.length > 0 ? (
 					<>
 						<Grid item xs={12}>

@@ -26,7 +26,7 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
 
 	useEffect(() => {
 		setValue('email', selectedUser.email);
-		setValue('username', selectedUser.displayName);
+		setValue('displayName', selectedUser.displayName);
 		setValue('role', selectedUser.role);
 		setValue('wallet', selectedUser.wallet);
 	}, [selectedUser]);
@@ -58,12 +58,12 @@ function EditUserDialog({ onSubmit, open, onRequestClose, selectedUser }) {
 						fullWidth
 					/>
 					<TextField
-						error={!!errors.username}
-						helperText={errors.username && 'Введите логин'}
+						error={!!errors.displayName}
+						helperText={errors.displayName && 'Введите логин'}
 						label='Логин'
 						inputProps={{
 							tabIndex: '2',
-							...register('username', {
+							...register('displayName', {
 								required: true,
 							}),
 						}}

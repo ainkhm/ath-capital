@@ -27,6 +27,7 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 			<Table className={classes.table} aria-label='simple table'>
 				<TableHead>
 					<TableRow>
+						<TableCell>Name</TableCell>
 						<TableCell>Адрес кошелька</TableCell>
 						<TableCell>Сумма вывода</TableCell>
 						<TableCell>Статус</TableCell>
@@ -36,6 +37,7 @@ export default function BasicTable({ requests, approveRequest, rejectRequest, de
 				<TableBody>
 					{requests?.map((row, index) => (
 						<TableRow key={index}>
+							<TableCell>{row.userName}</TableCell>
 							<TableCell>{row.address}</TableCell>
 							<TableCell>{row.amount}</TableCell>
 							<TableCell>
